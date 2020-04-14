@@ -6,8 +6,8 @@ import Search from './postList/Search';
 
 const Posts = (props) => {
   const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
   const [query, setQuery] = useState('');
+  const [createPost, setCreatePost] = useState(false);
 
   useEffect(() => {
     getData();
@@ -33,12 +33,17 @@ const Posts = (props) => {
     setQuery('');
   };
 
+  const toggleCreatePost = () => {
+    setCreatePost(!createPost);
+  };
+
   return (
     <div>
-      {props.user && <PostForm refresh={getData} />}
+      <button onClick={getNewestPosts}>sort by new</button>
+      {props.user && createPost && <PostForm refresh={getData} />}
+      <button onClick={toggleCreatePost}>Create Post</button>
       <Search updateSearchText={updateSearchText} executeSearch={executeSearch} query={query} />
       <PostsList posts={posts} />
-      <button onClick={getNewestPosts}>sort by new</button>
     </div>
   );
 };

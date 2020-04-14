@@ -29,6 +29,11 @@ router.get('/posts', (req, res) => {
     });
 });
 
+// router.get('/posts', (req,res) => {
+//   let sort = {};
+//   if(req.query.sortBy)
+// })
+
 router.get('/posts/:id', (req, res) => {
   const postId = req.params.id;
   Post.findById(postId)
@@ -46,9 +51,6 @@ router.get('/posts/:id', (req, res) => {
 router.post('/posts', (req, res) => {
   // Todo: add a middleware to protect this route from non-logged in users
 
-  // const title = req.body.title;
-  // const type = req.body.type;
-  // const content = req.body.content
   const { title, type, content } = req.body;
 
   Post.create({
@@ -84,6 +86,7 @@ router.post('/posts/:id/upvote', (req, res) => {
   }
 
   Post.findByIdAndUpdate(postId, { $inc: { upvote_count: incr } }, { new: true })
+    .populate('_author')
     .then((post) => {
       res.json(post);
     })
@@ -110,6 +113,7 @@ router.post('/posts/:id/upvote', (req, res) => {
   }
 
   Post.findByIdAndUpdate(postId, { $inc: { upvote_count: decr } }, { new: true })
+    .populate('_author')
     .then((post) => {
       res.json(post);
     })
