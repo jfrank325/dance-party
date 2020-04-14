@@ -1,0 +1,8 @@
+.button {
+  background: coral;
+  color: white;
+  max-width: 5rem;
+  max-height: 2rem;
+  font-size: 1.2rem;
+  border: solid white 0.5px;
+}
