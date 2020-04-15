@@ -1,4 +1,5 @@
 import React from 'react';
+import MagGlass from '../../images/search.jpg';
 
 const Search = ({ updateSearchText, executeSearch, query }) => {
   const handleChange = (e) => {
@@ -10,10 +11,15 @@ const Search = ({ updateSearchText, executeSearch, query }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input type="text" value={query} onChange={handleChange} />
-        <button type="submit">Search</button>
+    <div className="search-container">
+      <form className="search-form" onSubmit={onSubmit}>
+        <div className="search-inner-container">
+          <img style={{ width: '35px' }} src={MagGlass} alt="Magnifying Glass" />
+          <input className="search-input" type="text" value={query} onChange={handleChange} />
+          {/* <button className="search-button" type="submit"> */}
+          {/* Search
+        </button> */}
+        </div>
       </form>
     </div>
   );

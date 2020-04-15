@@ -23,25 +23,27 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
-        <Route
-          path="/signup"
-          render={(props) => (
-            <Signup
-              history={props.history}
-              // {...props}
-              setUser={this.setUser}
-            />
-          )}
-          // component={Signup}
-        />
-        <Route path="/login" render={(props) => <Login history={props.history} setUser={this.setUser} />} />
+        <div className="main-container">
+          <Route
+            path="/signup"
+            render={(props) => (
+              <Signup
+                history={props.history}
+                // {...props}
+                setUser={this.setUser}
+              />
+            )}
+            // component={Signup}
+          />
+          <Route path="/login" render={(props) => <Login history={props.history} setUser={this.setUser} />} />
 
-        <Route exact path="/" render={(props) => <Posts {...props} user={this.state.user} />} />
-        <Route
-          exact
-          path="/posts/:postId"
-          render={(props) => <PostDetail {...props} isLoggedIn={Boolean(this.state.user)} />}
-        />
+          <Route exact path="/" render={(props) => <Posts {...props} user={this.state.user} />} />
+          <Route
+            exact
+            path="/posts/:postId"
+            render={(props) => <PostDetail {...props} isLoggedIn={Boolean(this.state.user)} />}
+          />
+        </div>
       </div>
     );
   }

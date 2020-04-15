@@ -3,6 +3,7 @@ import axios from 'axios';
 import PostForm from './PostForm';
 import PostsList from './postList/PostsList';
 import Search from './postList/Search';
+import Pencil from '../images/Pencil.png';
 
 const Posts = (props) => {
   const [posts, setPosts] = useState([]);
@@ -39,11 +40,19 @@ const Posts = (props) => {
 
   return (
     <div>
-      <button onClick={getNewestPosts}>sort by new</button>
-      {props.user && createPost && <PostForm refresh={getData} />}
-      <button onClick={toggleCreatePost}>Create Post</button>
       <Search updateSearchText={updateSearchText} executeSearch={executeSearch} query={query} />
-      <PostsList posts={posts} />
+      <div className="create-sort-container">
+        <div className="create-container">
+          <img style={{ width: '40px' }} src={Pencil} alt="Pencil" />
+          {props.user && createPost && <PostForm refresh={getData} />}
+          <button onClick={toggleCreatePost}>Create Post</button>
+        </div>
+        <button className="sort-button" onClick={getNewestPosts}>
+          Newest
+        </button>
+        <button className="sort-button">Upvotes</button>
+        <PostsList posts={posts} />
+      </div>
     </div>
   );
 };

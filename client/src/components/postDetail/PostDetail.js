@@ -43,7 +43,7 @@ const PostDetail = (props) => {
         <Content type={type} text={content} />
       )}
       <Author author={_author.username} />
-      <p>posted on {new Date(created_at).toDateString()}</p>
+      <span>on {new Date(created_at).toDateString()}</span>
       <p>
         {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
       </p>

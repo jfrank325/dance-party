@@ -5,9 +5,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
 }
 
+.navbar h1 {
+  font-family: 'Lobster';
+  color: rgb(241, 102, 52);
+  font-size: 2rem;
+}
 .navbar a {
   color: whitesmoke;
   padding: 0 15px;
@@ -15,11 +19,21 @@
 
 a {
   text-decoration: none;
+}
+
+b {
   color: deepskyblue;
 }
 
 .App {
   text-align: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: whitesmoke;
 }
 
 @keyframes donut-spin {
@@ -38,4 +52,63 @@ a {
   width: 30px;
   height: 30px;
   animation: donut-spin 1.2s linear infinite;
+}
+
+/* Search */
+.search-container {
+  border: 2px solid deepskyblue;
+  border-radius: 5px;
+  width: 40%;
+  margin-top: 1rem;
+}
+
+.search-input {
+}
+
+.search-inner-container {
+  display: flex;
+  /* width: 10rem; */
+}
+
+/* Create and Sort */
+
+.create-sort-container {
+  text-align: left;
+  margin: 0 2rem;
+}
+
+/* Create */
+
+.create-container {
+  margin-top: 1rem;
+  font-size: large;
+  font-weight: 800;
+  display: flex;
+  background: white;
+  width: 10rem;
+}
+
+/* Sort  */
+
+.sort-button {
+  border-left: 2px solid deepskyblue;
+  margin: 1.8rem 1rem 0.5rem 1rem;
+  padding: 0.8rem;
+}
+
+/* PostCard */
+
+.postcard-container {
+  border-radius: 5px;
+  background: white;
+  padding: 1.2rem;
+  border-bottom: 1px solid rgb(219, 219, 219);
+  text-align: left;
+
+  margin-bottom: 1rem;
+}
+
+.postcard-container:hover {
+  box-shadow: 2px 3px 3px rgb(219, 219, 219);
+  font-size: 108%;
 }

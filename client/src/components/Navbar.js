@@ -31,12 +31,15 @@ const Navbar = ({ user, setUser }) => {
   //   margin-bottom: 20px;
   // }
   return (
-    <nav className="navbar bg-blue-300 min-h-12 w-full flex items-center justify-between mb-12">
+    <nav className="navbar">
       <Link to="/">
         <img style={{ width: '50px' }} src={Logo} alt="Logo" />
       </Link>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">Signup</Link>
+      <h1>DanceParty</h1>
+      <div className="auth-links">
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Signup</Link>
+      </div>
     </nav>
   );
 };
