@@ -34,13 +34,15 @@ const Posts = (props) => {
     setPosts(sortedDownPosts);
   };
 
-  const updateSearchText = (text) => {
-    setQuery(text);
-  };
+  // const updateSearchText = (text) => {
+  //   setQuery(text);
+  // };
 
   const executeSearch = () => {
-    let filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(query));
-    setPosts(filteredPosts);
+    let filteredPosts = posts.filter(
+      (post) => post.title.toLowerCase().includes(query) || post.content.toLowerCase().includes(query)
+    );
+    query ? setPosts(filteredPosts) : setPosts(posts);
     setQuery('');
   };
 
@@ -50,7 +52,7 @@ const Posts = (props) => {
 
   return (
     <div>
-      <Search updateSearchText={updateSearchText} executeSearch={executeSearch} query={query} />
+      <Search updateSearchText={(text) => setQuery(text)} executeSearch={executeSearch} query={query} />
       <div className="content-container">
         <div className="create-sort-container">
           <div className="">

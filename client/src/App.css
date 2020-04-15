@@ -69,10 +69,12 @@ b {
 
 .search-input {
   width: 100%;
+  color: black;
 }
 
 .search-inner-container {
   display: flex;
+  color: black;
   /* width: 10rem; */
 }
 
@@ -102,6 +104,10 @@ b {
   width: 10rem;
   height: 80%;
   color: white;
+}
+
+#create-container input {
+  color: black;
 }
 
 #create-container:hover {

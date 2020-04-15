@@ -4,9 +4,10 @@ import Author from '../postDetail/Author';
 import axios from 'axios';
 
 const PostCard = ({ post }) => {
-  const [linkTitle, setlinkTitle] = useState(null);
-  const [linkImage, setlinkImage] = useState(null);
-  const [linkContent, setlinkContent] = useState(null);
+  const [linkTitle, setlinkTitle] = useState('');
+  const [linkImage, setlinkImage] = useState('');
+  const [linkContent, setlinkContent] = useState('');
+  const [linkUrl, setLinkUrl] = useState('');
 
   useEffect(() => {
     const getPreview = async () => {
@@ -17,6 +18,7 @@ const PostCard = ({ post }) => {
       setlinkTitle(res.data.title);
       setlinkImage(res.data.image);
       setlinkContent(res.data.description);
+      setLinkUrl(res.data.url);
       console.log(res);
     };
     if (post.link) {
@@ -25,27 +27,30 @@ const PostCard = ({ post }) => {
   }, [post.link]);
 
   // console.log('this is the preveiw', link);
-  return (
+  return !post.link ? (
     <div key={post._id} className="postcard-container">
       <Link to={`/posts/${post._id}`}>
-        {!post.link ? (
-          <div>
-            <b>{post.title}</b>
-            <p>{post.content.slice(0, 20)}...</p>
-            <Author author={post._author.username} />
-          </div>
-        ) : (
-          <div>
-            <b>{linkTitle}</b>
-            <img src={linkImage} alt="link" />
-            <p>{linkContent}</p>
-          </div>
-        )}
-        <span role="img" aria-label="upvote emoji">
-          {post.upvote_count}⏫
-        </span>
+        <div>
+          <b>{post.title}</b>
+          <p>{post.content.slice(0, 20)}...</p>
+          <Author author={post._author.username} />
+        </div>
       </Link>
     </div>
+  ) : (
+    <>
+      <div>
+        <a href={linkUrl}>
+          <b>{linkTitle}</b>
+          <img src={linkImage} alt="link" />
+          <p>{linkContent}</p>
+          )}
+          <span role="img" aria-label="upvote emoji">
+            {post.upvote_count}⏫
+          </span>
+        </a>
+      </div>
+    </>
   );
 };
 
