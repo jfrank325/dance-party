@@ -5,6 +5,7 @@ const PostForm = ({ refresh }) => {
   const [state, setState] = useState({
     title: '',
     content: '',
+    link: '',
     type: 'text',
   });
 
@@ -21,25 +22,26 @@ const PostForm = ({ refresh }) => {
       .post('/api/posts', {
         title: state.title,
         type: state.type,
+        link: state.link,
         content: state.content,
       })
       .then(() => {
         console.log('Response received, calling getData in <Posts/>');
         refresh();
-        setState({ ...state, title: '', content: '', type: 'text' });
+        setState({ ...state, title: '', content: '', link: '', type: 'text' });
       });
   };
 
-  const { title, content, type } = state;
+  const { title, content, type, link } = state;
 
   return (
     <form className="create-post" onSubmit={handleSubmit}>
       <label htmlFor="title">Title</label>
       <input id="title" name="title" value={title} onChange={handleChange} />
-
+      <label htmlFor="link">Link</label>
+      <input id="link" name="link" value={link} onChange={handleChange} />
       <label htmlFor="content">Content</label>
       <input id="content" name="content" value={content} onChange={handleChange} />
-
       <label htmlFor="type">Type</label>
       <select value={type} name="type" onChange={handleChange}>
         <option value="link">Link</option>

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
 const User = require('../models/User');
+
 /* Here we'll write the routes for the posts */
 
 router.get('/posts', (req, res) => {
@@ -51,11 +52,12 @@ router.get('/posts/:id', (req, res) => {
 router.post('/posts', (req, res) => {
   // Todo: add a middleware to protect this route from non-logged in users
 
-  const { title, type, content } = req.body;
+  const { title, type, content, link } = req.body;
 
   Post.create({
     title: title,
     type: type,
+    link: link,
     content: content,
     upvote_count: 0,
     _author: req.user._id,

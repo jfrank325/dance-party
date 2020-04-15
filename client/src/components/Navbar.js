@@ -13,23 +13,19 @@ const Navbar = ({ user, setUser }) => {
   if (user) {
     return (
       <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link onClick={logout} to="/">
-          Logout
+        <Link to="/">
+          <img style={{ width: '50px' }} src={Logo} alt="Logo" />
         </Link>
+        <h1>DanceParty</h1>
+        <div className="auth-links">
+          <Link onClick={logout} to="/">
+            Logout
+          </Link>
+        </div>
       </nav>
     );
   }
 
-  // .navbar {
-  //   background-color: deepskyblue;
-  //   min-height: 50px;
-  //   width: 100%;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: space-between;
-  //   margin-bottom: 20px;
-  // }
   return (
     <nav className="navbar">
       <Link to="/">
