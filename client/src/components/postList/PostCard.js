@@ -19,7 +19,7 @@ const PostCard = ({ post }) => {
       setlinkImage(res.data.image);
       setlinkContent(res.data.description);
       setLinkUrl(res.data.url);
-      console.log(res);
+      // console.log(res);
     };
     if (post.link) {
       getPreview();
@@ -34,7 +34,10 @@ const PostCard = ({ post }) => {
           <b>{post.title}</b>
           <p>{post.content.slice(0, 20)}...</p>
           <img src={post.image} alt={post.titel} />
-          {post.video ? <video src={post.video} controls /> : <> </>}
+          {post.video ? <video autoPlay loop muted src={post.video} controls /> : <> </>}
+          <span role="img" aria-label="upvote emoji">
+            {post.upvote_count}↑
+          </span>
           <Author author={post._author.username} />
         </div>
       </div>
@@ -47,8 +50,9 @@ const PostCard = ({ post }) => {
           <img src={linkImage} alt={post.title} />
           <p>{linkContent}</p>
           <span role="img" aria-label="upvote emoji">
-            {post.upvote_count}⏫
+            {post.upvote_count}↑
           </span>
+          <Author author={post._author.username} />
         </a>
       </div>
     </>

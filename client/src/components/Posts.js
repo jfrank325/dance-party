@@ -22,6 +22,7 @@ const Posts = (props) => {
 
   const getNewestPosts = async () => {
     const res = axios.get('/api/posts?sortBy=created_at');
+    setPosts(res.data);
   };
 
   const sortByUpvote = () => {
@@ -39,9 +40,7 @@ const Posts = (props) => {
   // };
 
   const executeSearch = () => {
-    let filteredPosts = posts.filter(
-      (post) => post.title.toLowerCase().includes(query) || post.content.toLowerCase().includes(query)
-    );
+    let filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(query));
     query ? setPosts(filteredPosts) : setPosts(posts);
     setQuery('');
   };
@@ -49,6 +48,7 @@ const Posts = (props) => {
   const toggleCreatePost = () => {
     setCreatePost(!createPost);
   };
+  console.log('these are the posts in posts', posts);
 
   return (
     <div>

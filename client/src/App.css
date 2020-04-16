@@ -176,7 +176,7 @@ b {
   padding: 0.3rem;
   border-radius: 5px;
   color: white;
-  width: 30%;
+  width: 300px;
 }
 
 @media screen and (max-width: 600px) {

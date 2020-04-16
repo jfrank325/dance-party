@@ -20,8 +20,15 @@ const postSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
+    ],
     image: String,
     video: String,
+    url: String,
     upvote_count: Number,
   },
   {

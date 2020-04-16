@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
 const User = require('../models/User');
+const Comments = require('../models/Comments');
 const uploadCloud = require('../config/cloudinary');
 const url = require('url');
 
@@ -55,7 +56,7 @@ router.post('/posts', (req, res) => {
   // Todo: add a middleware to protect this route from non-logged in users
   // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
 
-  const { title, type, content, link, image, video } = req.body;
+  const { title, type, content, link, image, video, url } = req.body;
 
   Post.create({
     title: title,
@@ -64,6 +65,7 @@ router.post('/posts', (req, res) => {
     content: content,
     image: image,
     video: video,
+    url: url,
     upvote_count: 0,
     _author: req.user._id,
   })
@@ -76,6 +78,28 @@ router.post('/posts', (req, res) => {
       });
     });
 });
+
+// router.post('/posts/:id/comments', (req, res, next) => {
+//   const content = req.body.content,
+//   const author = req.user._id;
+//   const postId = req.params.id;
+
+//   Comments.create({
+//     content,
+//     author,
+//   })
+//   .then(commentDocument => {
+//     const commentId = commentDocument._id;
+//     return Post.updateOne({ _id: postId }, { $push: { comments: commentId }})
+
+//   })
+//   .then(() => {
+//     res.json({})
+//   })
+//   .catch(err => {
+//     next(err)
+//   })
+// })
 
 router.post('/posts/:id/upvote', (req, res) => {
   const postId = req.params.id;

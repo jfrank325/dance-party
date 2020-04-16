@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PostForm = ({ refresh }) => {
@@ -9,8 +9,30 @@ const PostForm = ({ refresh }) => {
     type: 'text',
     image: '',
     video: '',
+    url: '',
     loading: 'false',
   });
+
+  // useEffect(() => {
+  //   const getPreview = async () => {
+  //     const res = await axios.post('https://api.linkpreview.net', {
+  //       q: state.link,
+  //       key: process.env.REACT_APP_LINK_PREVIEW_KEY,
+  //     });
+  //     setState({
+  //       ...state,
+  //       title: res.data.title,
+  //       image: res.data.image,
+  //       content: res.data.content,
+  //       url: res.data.url,
+  //     });
+
+  //     // console.log(res);
+  //   };
+  //   if (state.link) {
+  //     getPreview();
+  //   }
+  // }, [state.link]);
 
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -60,6 +82,7 @@ const PostForm = ({ refresh }) => {
         content: state.content,
         image: state.image,
         video: state.video,
+        url: state.url,
       })
       .then(() => {
         console.log('Response received, calling getData in <Posts/>');
@@ -79,8 +102,10 @@ const PostForm = ({ refresh }) => {
       <label htmlFor="content">Content</label>
       <input id="content" name="content" value={content} onChange={handleChange} />
       <label htmlFor="type">Type</label>
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <label htmlFor="imgPath">Upload Image</label>
         <input type="file" name="imgPath" onChange={uploadImage} />
+        <label htmlFor="videoPath">Upload Video</label>
         <input type="file" name="videoPath" onChange={uploadVideo} />
         {state.loading && state.title ? <div className="donut"></div> : <h4>Finished</h4>}
         {/* <input type="submit" value="SAVE" /> */}
