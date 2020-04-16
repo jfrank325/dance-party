@@ -55,7 +55,7 @@ router.post('/posts', (req, res) => {
   // Todo: add a middleware to protect this route from non-logged in users
   // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
 
-  const { title, type, content, link, image } = req.body;
+  const { title, type, content, link, image, video } = req.body;
 
   Post.create({
     title: title,
@@ -63,6 +63,7 @@ router.post('/posts', (req, res) => {
     link: link,
     content: content,
     image: image,
+    video: video,
     upvote_count: 0,
     _author: req.user._id,
   })

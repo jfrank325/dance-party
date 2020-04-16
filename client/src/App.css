@@ -85,7 +85,6 @@ b {
 .search-inner-container {
   display: flex;
   color: black;
-  /* width: 10rem; */
 }
 
 .content-container {
@@ -135,6 +134,10 @@ b {
   border-radius: 5px;
 }
 
+.postform-container input {
+  color: black;
+}
+
 .create-post {
   display: flex;
   flex-direction: column;
@@ -163,6 +166,17 @@ b {
 .postcard-container:hover {
   box-shadow: 2px 3px 3px rgb(219, 219, 219);
   font-size: 100.5%;
+}
+
+.button {
+  margin-top: 1rem;
+  font-size: large;
+  font-weight: 800;
+  background: deepskyblue;
+  padding: 0.3rem;
+  border-radius: 5px;
+  color: white;
+  width: 30%;
 }
 
 @media screen and (max-width: 600px) {

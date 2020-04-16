@@ -8,6 +8,8 @@ const PostForm = ({ refresh }) => {
     link: '',
     type: 'text',
     image: '',
+    video: '',
+    loading: 'false',
   });
 
   const uploadImage = async (e) => {
@@ -15,13 +17,30 @@ const PostForm = ({ refresh }) => {
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'gagwud8b');
+    setState({ ...state, loading: true });
+
     const res = await fetch('	https://api.cloudinary.com/v1_1/dv1aih6td/image/upload', {
       method: 'POST',
       body: data,
     });
     const file = await res.json();
 
-    setState({ ...state, image: file.secure_url });
+    setState({ ...state, image: file.secure_url, loading: false });
+  };
+
+  const uploadVideo = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'gagwud8b');
+    setState({ ...state, loading: true });
+    const res = await fetch('	https://api.cloudinary.com/v1_1/dv1aih6td/video/upload', {
+      method: 'POST',
+      body: data,
+    });
+    const file = await res.json();
+
+    setState({ ...state, video: file.secure_url, loading: false });
   };
 
   const handleChange = (event) => {
@@ -40,6 +59,7 @@ const PostForm = ({ refresh }) => {
         link: state.link,
         content: state.content,
         image: state.image,
+        video: state.video,
       })
       .then(() => {
         console.log('Response received, calling getData in <Posts/>');
@@ -48,7 +68,7 @@ const PostForm = ({ refresh }) => {
       });
   };
 
-  const { title, content, type, link, image } = state;
+  const { title, content, link } = state;
 
   return (
     <form className="create-post" encType="multipart/form-data" onSubmit={handleSubmit}>
@@ -61,13 +81,17 @@ const PostForm = ({ refresh }) => {
       <label htmlFor="type">Type</label>
       <div>
         <input type="file" name="imgPath" onChange={uploadImage} />
+        <input type="file" name="videoPath" onChange={uploadVideo} />
+        {state.loading && state.title ? <div className="donut"></div> : <h4>Finished</h4>}
         {/* <input type="submit" value="SAVE" /> */}
       </div>
       {/* <select value={type} name="type" onChange={handleChange}>
         <option value="link">Link</option>
         <option value="text">Text</option>
       </select> */}
-      <button onClick={refresh}>New Post</button>
+      <button className="button" onClick={refresh}>
+        Submit Post
+      </button>
     </form>
   );
 };

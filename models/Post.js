@@ -21,6 +21,7 @@ const postSchema = new Schema(
       ref: 'User',
     },
     image: String,
+    video: String,
     upvote_count: Number,
   },
   {

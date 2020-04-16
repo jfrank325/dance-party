@@ -34,6 +34,7 @@ const PostCard = ({ post }) => {
           <b>{post.title}</b>
           <p>{post.content.slice(0, 20)}...</p>
           <img src={post.image} alt={post.titel} />
+          {post.video ? <video src={post.video} controls /> : <> </>}
           <Author author={post._author.username} />
         </div>
       </div>
