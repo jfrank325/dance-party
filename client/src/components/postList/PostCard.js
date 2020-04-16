@@ -13,7 +13,7 @@ const PostCard = ({ post }) => {
     const getPreview = async () => {
       const res = await axios.post('https://api.linkpreview.net', {
         q: post.link,
-        key: 'd14e27307cc7630318cab10d757365c4',
+        key: process.env.REACT_APP_LINK_PREVIEW_KEY,
       });
       setlinkTitle(res.data.title);
       setlinkImage(res.data.image);
@@ -28,15 +28,15 @@ const PostCard = ({ post }) => {
 
   // console.log('this is the preveiw', link);
   return !post.link ? (
-    <div key={post._id} className="postcard-container">
-      <Link to={`/posts/${post._id}`}>
+    <Link to={`/posts/${post._id}`}>
+      <div key={post._id} className="postcard-container">
         <div>
           <b>{post.title}</b>
           <p>{post.content.slice(0, 20)}...</p>
           <Author author={post._author.username} />
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   ) : (
     <>
       <div>
@@ -44,7 +44,6 @@ const PostCard = ({ post }) => {
           <b>{linkTitle}</b>
           <img src={linkImage} alt="link" />
           <p>{linkContent}</p>
-          )}
           <span role="img" aria-label="upvote emoji">
             {post.upvote_count}⏫
           </span>

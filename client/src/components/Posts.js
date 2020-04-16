@@ -21,7 +21,6 @@ const Posts = (props) => {
 
   const getNewestPosts = async () => {
     const res = axios.get('/api/posts?sortBy=created_at');
-    setPosts(res.data);
   };
 
   const sortByUpvote = () => {
@@ -66,10 +65,20 @@ const Posts = (props) => {
               Downvotes
             </button>
           </div>
-          <div id="create-container">
-            <img style={{ width: '30px', paddingRight: '5px' }} src={Pencil} alt="Pencil" />
-            {props.user && createPost && <PostForm refresh={getData} />}
-            <button onClick={toggleCreatePost}> Create Post</button>
+          <div>
+            {props.user && !createPost ? (
+              <div id="create-container">
+                <img style={{ width: '30px', paddingRight: '5px' }} src={Pencil} alt="Pencil" />
+                <button onClick={toggleCreatePost}> Create Post</button>
+              </div>
+            ) : (
+              <div className="postform-container">
+                <PostForm refresh={getData} />
+                <button onClick={toggleCreatePost} className="dot">
+                  ↩
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <PostsList posts={posts} />

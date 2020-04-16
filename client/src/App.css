@@ -115,6 +115,21 @@ b {
   background: #ff6a33;
 }
 
+/* PostForm */
+
+.postform-container {
+  min-width: 50vw;
+  background: coral;
+  color: white;
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+
+.create-post {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Sort  */
 
 .sort-button {

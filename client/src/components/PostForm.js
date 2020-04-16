@@ -47,7 +47,7 @@ const PostForm = ({ refresh }) => {
         <option value="link">Link</option>
         <option value="text">Text</option>
       </select>
-      <button>New Post</button>
+      <button onClick={refresh}>New Post</button>
     </form>
   );
 };
