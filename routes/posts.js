@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
 const User = require('../models/User');
+const uploadCloud = require('../config/cloudinary');
+const url = require('url');
 
 /* Here we'll write the routes for the posts */
 
@@ -51,14 +53,16 @@ router.get('/posts/:id', (req, res) => {
 
 router.post('/posts', (req, res) => {
   // Todo: add a middleware to protect this route from non-logged in users
+  // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
 
-  const { title, type, content, link } = req.body;
+  const { title, type, content, link, image } = req.body;
 
   Post.create({
     title: title,
     type: type,
     link: link,
     content: content,
+    image: image,
     upvote_count: 0,
     _author: req.user._id,
   })

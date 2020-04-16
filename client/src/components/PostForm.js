@@ -7,7 +7,22 @@ const PostForm = ({ refresh }) => {
     content: '',
     link: '',
     type: 'text',
+    image: '',
   });
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'gagwud8b');
+    const res = await fetch('	https://api.cloudinary.com/v1_1/dv1aih6td/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+    const file = await res.json();
+
+    setState({ ...state, image: file.secure_url });
+  };
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
@@ -24,6 +39,7 @@ const PostForm = ({ refresh }) => {
         type: state.type,
         link: state.link,
         content: state.content,
+        image: state.image,
       })
       .then(() => {
         console.log('Response received, calling getData in <Posts/>');
@@ -32,10 +48,10 @@ const PostForm = ({ refresh }) => {
       });
   };
 
-  const { title, content, type, link } = state;
+  const { title, content, type, link, image } = state;
 
   return (
-    <form className="create-post" onSubmit={handleSubmit}>
+    <form className="create-post" encType="multipart/form-data" onSubmit={handleSubmit}>
       <label htmlFor="title">Title</label>
       <input id="title" name="title" value={title} onChange={handleChange} />
       <label htmlFor="link">Link</label>
@@ -43,10 +59,14 @@ const PostForm = ({ refresh }) => {
       <label htmlFor="content">Content</label>
       <input id="content" name="content" value={content} onChange={handleChange} />
       <label htmlFor="type">Type</label>
-      <select value={type} name="type" onChange={handleChange}>
+      <div>
+        <input type="file" name="imgPath" onChange={uploadImage} />
+        {/* <input type="submit" value="SAVE" /> */}
+      </div>
+      {/* <select value={type} name="type" onChange={handleChange}>
         <option value="link">Link</option>
         <option value="text">Text</option>
-      </select>
+      </select> */}
       <button onClick={refresh}>New Post</button>
     </form>
   );

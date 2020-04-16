@@ -20,6 +20,7 @@ const postSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    image: String,
     upvote_count: Number,
   },
   {

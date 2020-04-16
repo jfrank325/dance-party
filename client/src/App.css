@@ -1,3 +1,13 @@
+/* Color */
+
+.light-blue {
+  color: deepskyblue;
+}
+
+.orange {
+  color: rgb(241, 102, 52);
+}
+
 .navbar {
   background-color: deepskyblue;
   min-height: 50px;

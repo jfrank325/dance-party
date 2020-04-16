@@ -33,6 +33,7 @@ const PostCard = ({ post }) => {
         <div>
           <b>{post.title}</b>
           <p>{post.content.slice(0, 20)}...</p>
+          <img src={post.image} alt={post.titel} />
           <Author author={post._author.username} />
         </div>
       </div>
@@ -42,7 +43,7 @@ const PostCard = ({ post }) => {
       <div>
         <a href={linkUrl}>
           <b>{linkTitle}</b>
-          <img src={linkImage} alt="link" />
+          <img src={linkImage} alt={post.title} />
           <p>{linkContent}</p>
           <span role="img" aria-label="upvote emoji">
             {post.upvote_count}⏫
