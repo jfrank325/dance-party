@@ -8,20 +8,20 @@ const url = require('url');
 /* Here we'll write the routes for the posts */
 
 router.get('/posts', (req, res) => {
-  let sort = {};
+  // let sort = {};
   // if (req.query.sortBy) {
   //   sort[req.query.sortBy] = -1;
   // } else {
   //   sort.upvote_count = -1;
   // }
-  if (req.query.sortBy) {
-    sort = { [req.query.sortBy]: -1 };
-  } else {
-    sort = { upvote_count: -1 };
-  }
+  // if (req.query.sortBy) {
+  //   sort = { [req.query.sortBy]: -1 };
+  // } else {
+  //   sort = { created_at: -1 };
+  // }
 
   Post.find()
-    .sort(sort)
+    // .sort(sort)
     .limit(30)
     .then((posts) => {
       res.json(posts);
