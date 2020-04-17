@@ -80,8 +80,8 @@ const PostForm = ({ refresh }) => {
       <input id="link" name="link" value={link} onChange={handleChange} />
       <label htmlFor="content">Content</label>
       <input id="content" name="content" value={content} onChange={handleChange} />
-      <label htmlFor="type">Type</label>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      {/* <label htmlFor="type">Type</label> */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <label htmlFor="imgPath">Upload Image</label>
         <input type="file" name="imgPath" onChange={uploadImage} />
         <label htmlFor="videoPath">Upload Video</label>
@@ -92,7 +92,7 @@ const PostForm = ({ refresh }) => {
         <option value="link">Link</option>
         <option value="text">Text</option>
       </select> */}
-      <button className="button" onClick={refresh}>
+      <button className="button" style={{ margin: '2rem auto 0 auto' }} onClick={refresh}>
         Submit Post
       </button>
     </form>

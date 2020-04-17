@@ -149,6 +149,10 @@ b {
   flex-direction: column;
 }
 
+.create-post label {
+  margin-top: 0.8rem;
+}
+
 /* Sort  */
 
 .sort-button {

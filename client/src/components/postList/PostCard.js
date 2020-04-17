@@ -55,7 +55,7 @@ const PostCard = ({ post, deletePost, index }) => {
       </div>
     </>
   ) : (
-    <>
+    <div key={_id} className="postcard-container">
       <div>
         <a href={linkUrl}>
           <b>{linkTitle}</b>
@@ -65,9 +65,17 @@ const PostCard = ({ post, deletePost, index }) => {
             {upvote_count}↑
           </span>
           <Author author={_author.username} />
+          <span>on {new Date(created_at).toDateString()}</span>
         </a>
+        <button
+          onClick={() => {
+            deletePost(index);
+          }}
+        >
+          Delete
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 
