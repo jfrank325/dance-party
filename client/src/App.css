@@ -71,9 +71,15 @@ b {
   width: 30%;
   margin-top: 1rem;
   margin: 1rem auto;
+  background: white;
+  padding: 2px;
 }
 
-.search-container input:focus {
+.search-container i {
+  color: rgb(57, 200, 248);
+}
+
+.search-container:hover {
   border: 3px solid rgb(57, 200, 248);
 }
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Author from '../postDetail/Author';
 import axios from 'axios';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, deletePost, index }) => {
   const [linkTitle, setlinkTitle] = useState('');
   const [linkImage, setlinkImage] = useState('');
   const [linkContent, setlinkContent] = useState('');
@@ -26,33 +26,45 @@ const PostCard = ({ post }) => {
     }
   }, [post.link]);
 
+  const { _id, title, link, content, image, video, upvote_count, _author, created_at } = post;
+
   // console.log('this is the preveiw', link);
-  return !post.link ? (
-    <Link to={`/posts/${post._id}`}>
-      <div key={post._id} className="postcard-container">
+  return !link ? (
+    <>
+      <div key={_id} className="postcard-container">
         <div>
-          <b>{post.title}</b>
-          <p>{post.content.slice(0, 20)}...</p>
-          <img src={post.image} alt={post.titel} />
-          {post.video ? <video autoPlay loop muted src={post.video} controls /> : <> </>}
+          <Link to={`/posts/${_id}`}>
+            <b>{title}</b>
+            <p>{content.slice(0, 20)}...</p>
+            {image ? <img src={image} alt={title} /> : <> </>}
+          </Link>
+          {video ? <video autoPlay loop muted src={video} controls /> : <> </>}
           <span role="img" aria-label="upvote emoji">
-            {post.upvote_count}↑
+            {upvote_count}↑
           </span>
-          <Author author={post._author.username} />
+          <Author author={_author.username} />
+          <span>on {new Date(created_at).toDateString()}</span>
+          <button
+            onClick={() => {
+              deletePost(index);
+            }}
+          >
+            Delete
+          </button>
         </div>
       </div>
-    </Link>
+    </>
   ) : (
     <>
       <div>
         <a href={linkUrl}>
           <b>{linkTitle}</b>
-          <img src={linkImage} alt={post.title} />
+          {linkImage ? <img src={linkImage} alt={title} /> : <p>Sorry This Link Isn't Available Right Now</p>}
           <p>{linkContent}</p>
           <span role="img" aria-label="upvote emoji">
-            {post.upvote_count}↑
+            {upvote_count}↑
           </span>
-          <Author author={post._author.username} />
+          <Author author={_author.username} />
         </a>
       </div>
     </>

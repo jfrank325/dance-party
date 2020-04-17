@@ -22,6 +22,7 @@ router.get('/posts', (req, res) => {
 
   Post.find()
     // .sort(sort)
+    .populate('_author')
     .limit(30)
     .then((posts) => {
       res.json(posts);

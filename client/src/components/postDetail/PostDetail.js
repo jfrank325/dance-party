@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import './button/Button.css';
-import Content from './Content';
+// import Content from './Content';
 import Author from './Author';
 
 const PostDetail = (props) => {
@@ -91,7 +91,7 @@ const PostDetail = (props) => {
     return <div>Loading...</div>;
   }
 
-  const { _id, title, type, content, image, video, _author, created_at, upvote_count } = state.post;
+  const { _id, title, content, image, video, _author, created_at, upvote_count } = state.post;
   return (
     <div key={_id} className="postcard-container">
       <b>{title}</b>

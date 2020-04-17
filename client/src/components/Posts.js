@@ -10,7 +10,6 @@ const Posts = (props) => {
   const [posts, setPosts] = useState([]);
   const [query, setQuery] = useState('');
   const [createPost, setCreatePost] = useState(false);
-  const [sortedPosts, setSortedPosts] = useState([]);
 
   useEffect(() => {
     getData();
@@ -20,6 +19,7 @@ const Posts = (props) => {
     const res = await axios.get('/api/posts');
     setPosts(res.data.reverse());
   };
+
   // const getNewestPosts = async () => {
   //   const res = axios.get('/api/posts?sortBy=created_at');
   //   setPosts(res.data);
@@ -36,11 +36,21 @@ const Posts = (props) => {
   };
 
   const sortByNewest = () => {
-    setPosts([...posts].sort((a, b) => a.created_at - b.created_at));
+    getData();
+  };
+
+  const deletePost = (index) => {
+    const withoutPost = [...posts];
+    withoutPost.splice(index, 1);
+    setPosts(withoutPost);
   };
 
   const executeSearch = () => {
-    let filteredPosts = [...posts].filter((post) => post.title.toLowerCase().includes(query));
+    let filteredPosts = [...posts].filter((post) =>
+      post.content
+        ? post.content.toLowerCase() && post.title.toLowerCase().includes(query)
+        : post.title.toLowerCase().includes(query)
+    );
     query ? setPosts(filteredPosts) : setPosts(posts);
     setQuery('');
   };
@@ -96,7 +106,7 @@ const Posts = (props) => {
             )}
           </div>
         </div>
-        <PostsList posts={posts} />
+        <PostsList posts={posts} deletePost={deletePost} />
       </div>
     </div>
   );

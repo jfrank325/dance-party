@@ -1,11 +1,11 @@
 import React from 'react';
 import PostCard from './PostCard';
 
-const PostsList = (props) => {
+const PostsList = ({ posts, deletePost }) => {
   return (
     <div>
-      {props.posts.map((post, index) => (
-        <PostCard key={index} post={post}></PostCard>
+      {posts.map((post, index) => (
+        <PostCard key={index} post={post} deletePost={deletePost} index={index}></PostCard>
       ))}
     </div>
   );
