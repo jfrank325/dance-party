@@ -38,7 +38,7 @@ const PostCard = ({ post, deletePost, index }) => {
             <p>{content.slice(0, 20)}...</p>
             {image ? <img src={image} alt={title} /> : <> </>}
           </Link>
-          {video ? <video autoPlay loop muted src={video} controls /> : <> </>}
+          {video ? <video autoPlay loop muted src={video} controls controlsList="nodownload" /> : <> </>}
           <span role="img" aria-label="upvote emoji">
             {upvote_count}↑
           </span>

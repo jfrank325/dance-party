@@ -11,6 +11,7 @@ import upArrow from '../../images/UpArrow.jpg';
 const PostDetail = (props) => {
   const [post, setPost] = useState(null);
   const [message, setMessage] = useState('');
+  const [showComments, setShowComments] = useState(false);
 
   const id = props.match.params.postId;
 
@@ -57,6 +58,10 @@ const PostDetail = (props) => {
       });
   };
 
+  const toggleShowComments = () => {
+    setShowComments(!showComments);
+  };
+
   if (!post) {
     return <div>Loading...</div>;
   }
@@ -82,7 +87,7 @@ const PostDetail = (props) => {
         <b>{title}</b>
         <p>{content}</p>
         <img src={image} alt="" />
-        {video ? <video autoPlay loop muted src={video} controls /> : <> </>}
+        {video ? <video autoPlay loop muted src={video} controls controlsList="nodownload" /> : <> </>}
 
         <Author author={_author.username} />
 
@@ -90,9 +95,17 @@ const PostDetail = (props) => {
         <p>
           {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
         </p>
-        {comments.map((comment, index) => (
-          <p key={index}>{comment.message}</p>
-        ))}
+        {showComments &&
+          comments.map((comment, index) => (
+            <div>
+              <p key={index}>{comment.message}</p>
+            </div>
+          ))}
+        {showComments ? (
+          <button onClick={toggleShowComments}>Hide Comments</button>
+        ) : (
+          <button onClick={toggleShowComments}>Show Comments</button>
+        )}
         <form onSubmit={handleSubmit}>
           <label htmlFor="comment">Comments: {'    '}</label>
           <input name="comment" value={message} onChange={(text) => setMessage(text.target.value)} type="text" />
