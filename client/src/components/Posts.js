@@ -25,15 +25,9 @@ const Posts = (props) => {
   //   setPosts(res.data);
   // };
 
-  const sortByUpvotes = () => {
-    let sortedUp = [...posts].sort((a, b) => b.upvote_count - a.upvote_count);
-    setPosts(sortedUp);
-  };
+  const sortByUpvotes = () => setPosts([...posts].sort((a, b) => b.upvote_count - a.upvote_count));
 
-  const sortByDownvotes = () => {
-    let sortedDown = [...posts].sort((a, b) => a.upvote_count - b.upvote_count);
-    setPosts(sortedDown);
-  };
+  const sortByCommentCount = () => setPosts([...posts].sort((a, b) => b.comments.length - a.comments.length));
 
   const sortByNewest = () => {
     getData();
@@ -72,8 +66,8 @@ const Posts = (props) => {
             <button className="sort-button" onClick={sortByUpvotes}>
               Upvotes
             </button>
-            <button className="sort-button" onClick={sortByDownvotes}>
-              Downvotes
+            <button className="sort-button" onClick={sortByCommentCount}>
+              Comments
             </button>
           </div>
           <div>

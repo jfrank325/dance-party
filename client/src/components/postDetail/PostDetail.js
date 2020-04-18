@@ -57,7 +57,6 @@ const PostDetail = (props) => {
       });
   };
 
-  console.log('message', message);
   if (!post) {
     return <div>Loading...</div>;
   }
@@ -91,13 +90,13 @@ const PostDetail = (props) => {
         <p>
           {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
         </p>
+        {comments.map((comment, index) => (
+          <p key={index}>{comment.message}</p>
+        ))}
         <form onSubmit={handleSubmit}>
           <label htmlFor="comment">Comments: {'    '}</label>
           <input name="comment" value={message} onChange={(text) => setMessage(text.target.value)} type="text" />
         </form>
-        {comments.map((comment, index) => (
-          <p key={index}>{comment.message}</p>
-        ))}
       </div>
     </div>
   );
