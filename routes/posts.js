@@ -43,6 +43,7 @@ router.get('/posts/:id', (req, res) => {
   const postId = req.params.id;
   Post.findById(postId)
     .populate('_author')
+    .populate('comments')
     .then((post) => {
       res.json(post);
     })
@@ -80,27 +81,48 @@ router.post('/posts', (req, res) => {
     });
 });
 
-// router.post('/posts/:id/comments', (req, res, next) => {
-//   const content = req.body.content,
-//   const author = req.user._id;
-//   const postId = req.params.id;
+router.post('/posts/:id/comments', (req, res, next) => {
+  const message = req.body.message;
+  const postId = req.params.id;
+  const author = req.user.id;
 
-//   Comments.create({
-//     content,
-//     author,
-//   })
-//   .then(commentDocument => {
-//     const commentId = commentDocument._id;
-//     return Post.updateOne({ _id: postId }, { $push: { comments: commentId }})
+  Comments.create({
+    message,
+    author,
+  })
+    .then((commentDocument) => {
+      const commentId = commentDocument._id;
+      return Post.updateOne({ _id: postId }, { $push: { comments: commentId } });
+    })
+    .then(() => {
+      res.json({});
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
-//   })
-//   .then(() => {
-//     res.json({})
-//   })
-//   .catch(err => {
-//     next(err)
-//   })
-// })
+router.get('/posts/:id/comments', (req, res, next) => {
+  Post.findById(req.params.id)
+    .populate({
+      path: 'comments',
+      // populate: {
+      //   path: '_author',
+      // },
+    })
+    .then((post) => {
+      const comments = post.comments.map((comment) => {
+        return {
+          message: comment.message,
+          // author: comment._author.username,
+        };
+      });
+      res.json(comments);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 router.post('/posts/:id/upvote', (req, res) => {
   const postId = req.params.id;

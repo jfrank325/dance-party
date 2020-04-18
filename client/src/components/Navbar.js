@@ -14,7 +14,7 @@ const Navbar = ({ user, setUser }) => {
     return (
       <nav className="navbar">
         <Link to="/">
-          <img style={{ width: '50px' }} src={Logo} alt="Logo" />
+          <img src={Logo} alt="Logo" />
         </Link>
         <h1>DanceParty</h1>
         <div className="auth-links">
@@ -29,7 +29,7 @@ const Navbar = ({ user, setUser }) => {
   return (
     <nav className="navbar">
       <Link to="/">
-        <img style={{ width: '50px' }} src={Logo} alt="Logo" />
+        <img src={Logo} alt="Logo" />
       </Link>
       <h1>DanceParty</h1>
       <div className="auth-links">

@@ -34,13 +34,16 @@ const Login = ({ setUser, history }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username: </label>
-        <input type="text" id="username" name="username" value={state.username} onChange={handleChange} />
-
-        <label htmlFor="password">Password: </label>
-        <input type="password" name="password" id="password" value={state.password} onChange={handleChange} />
-
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="auth-input">
+          <label htmlFor="username">Username: </label>
+          <input type="text" id="username" name="username" value={state.username} onChange={handleChange} />
+        </div>
+        <div className="auth-input">
+          {' '}
+          <label htmlFor="password">Password: </label>
+          <input type="password" name="password" id="password" value={state.password} onChange={handleChange} />
+        </div>
         <button type="submit">Sign in</button>
       </form>
       {state.message && <p>{state.message}</p>}
