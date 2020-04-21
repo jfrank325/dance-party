@@ -34,11 +34,10 @@ const Posts = (props) => {
     getData();
   };
 
-  // const deletePost = (id) => {
-  //   const withoutPost = [...posts];
-  //   withoutPost.splice(id, 1);
-  //   setPosts(withoutPost);
-  // };
+  const deletePost = (id) => {
+    setPosts([...posts].filter((post) => id !== post._id));
+    getData();
+  };
 
   const executeSearch = () => {
     let filteredPosts = [...posts].filter((post) =>
@@ -102,7 +101,7 @@ const Posts = (props) => {
             )}
           </div>
         </div>
-        <PostsList posts={posts} />
+        <PostsList posts={posts} deletePost={deletePost} />
       </div>
     </div>
   );

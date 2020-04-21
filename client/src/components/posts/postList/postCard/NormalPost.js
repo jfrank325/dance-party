@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import upArrow from '../../../../images/UpArrow.jpg';
-import downArrow from '../../../../images/DownArrow.jpg';
 import axios from 'axios';
 import NormalContent from './NormalContent';
 import Votes from './Votes';
 
-const NormalPost = ({ post }) => {
+const NormalPost = ({ post, deletePost }) => {
   const [thisPost, setThisPost] = useState(post);
   const { _id, title, content, image, video, upvote_count, _author, created_at } = thisPost;
   const id = post._id;
@@ -20,6 +18,12 @@ const NormalPost = ({ post }) => {
     setThisPost(res.data);
   };
 
+  const deleteThisPost = () => {
+    axios.post(`/api/posts/${id}/delete`);
+    deletePost(id);
+    // console.log(res);
+  };
+
   return (
     <div className="full-post-container">
       <div className="postcard-container">
@@ -32,7 +36,8 @@ const NormalPost = ({ post }) => {
             {/* <Link to="/login">Login to upvote this post</Link> */}
             {/* )} */}
           </div>
-          <NormalContent post={post} />
+          <NormalContent post={thisPost} deletePost={deleteThisPost} />
+          {/* <button onClick={() => deleteThisPost(id)}>Try this delete</button> */}
         </div>
       </div>
     </div>

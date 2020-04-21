@@ -1,8 +1,8 @@
 import React from 'react';
 import Author from '../../postDetail/Author';
 
-const LinkContent = ({ ...props }) => {
-  const { url, title, content, image, author, date, upvotes } = props;
+const LinkContent = ({ deletePost, ...props }) => {
+  const { _id, url, title, content, image, author, date, upvotes } = props;
   return (
     <div>
       <a href={url}>
@@ -14,6 +14,7 @@ const LinkContent = ({ ...props }) => {
           {upvotes} {upvotes === 1 ? 'Upvote' : 'Upvotes'}
         </p>
       </a>
+      <button onClick={() => deletePost(_id)}>Delete</button>
     </div>
   );
 };

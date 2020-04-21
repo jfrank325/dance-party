@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import upArrow from '../../../../images/UpArrow.jpg';
-import downArrow from '../../../../images/DownArrow.jpg';
-import Author from '../../postDetail/Author';
 import LinkContent from './LinkContent';
 import Votes from './Votes';
 
-const LinkPost = ({ post }) => {
-  const [linkTitle, setlinkTitle] = useState('');
+const LinkPost = ({ post, deletePost }) => {
+  const [linkTitle, setlinkTitle] = useState(post.title);
   const [linkImage, setlinkImage] = useState('');
   const [linkContent, setlinkContent] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
   const [thisPost, setThisPost] = useState(post);
 
-  const { title, upvote_count, _author, created_at } = thisPost;
+  const { upvote_count, _author, created_at } = thisPost;
   const id = post._id;
 
   const handleUpvote = async () => {
@@ -42,6 +39,13 @@ const LinkPost = ({ post }) => {
       getPreview();
     }
   }, [post.link]);
+
+  const deleteThisPost = () => {
+    axios.post(`/api/posts/${id}/delete`);
+    deletePost(id);
+    // console.log(res);
+  };
+
   return (
     <div className="full-post-container">
       <div className="postcard-container">
@@ -53,12 +57,13 @@ const LinkPost = ({ post }) => {
           <LinkContent
             id={id}
             url={linkUrl}
-            title={title}
+            title={linkTitle}
             content={linkContent}
             image={linkImage}
             author={_author.username}
             date={created_at}
             upvotes={upvote_count}
+            deletePost={deleteThisPost}
           />
         </div>
       </div>
