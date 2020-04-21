@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import upArrow from '../../../../images/UpArrow.jpg';
 import downArrow from '../../../../images/DownArrow.jpg';
-import Author from '../../postDetail/Author';
 import axios from 'axios';
+import NormalContent from './NormalContent';
+import Votes from './Votes';
 
-const NormalPost = ({ post, deletePost, index }) => {
+const NormalPost = ({ post }) => {
   const [thisPost, setThisPost] = useState(post);
   const { _id, title, content, image, video, upvote_count, _author, created_at } = thisPost;
   const id = post._id;
@@ -26,38 +26,13 @@ const NormalPost = ({ post, deletePost, index }) => {
         <div className="card-vote-container">
           <div>
             {/* {props.isLoggedIn ? ( */}
-            <div className="arrow-container">
-              <button onClick={handleUpvote}>
-                <img src={upArrow} className="upvote" alt="Up Arrow" />
-              </button>
-              <button onClick={handleDownvote}>
-                <img src={downArrow} className="upvote" alt="Down Arrow" />
-              </button>
-            </div>
+            <Votes handleUpvote={handleUpvote} handleDownvote={handleDownvote} id={id} />
+
             {/* ) : ( */}
             {/* <Link to="/login">Login to upvote this post</Link> */}
             {/* )} */}
           </div>
-          <div key={_id} className="">
-            <Link to={`/posts/${_id}`}>
-              <b>{title}</b>
-              <p>{content}</p>
-              <img src={image} alt="" />
-              {video ? <video autoPlay loop muted src={video} controls controlsList="nodownload" /> : <> </>}
-            </Link>
-
-            <Author author={_author.username} date={new Date(created_at).toDateString()} />
-            <p>
-              {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
-            </p>
-            <button
-              onClick={() => {
-                deletePost(index);
-              }}
-            >
-              Delete
-            </button>
-          </div>
+          <NormalContent post={post} />
         </div>
       </div>
     </div>

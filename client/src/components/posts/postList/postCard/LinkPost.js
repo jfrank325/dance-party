@@ -3,8 +3,10 @@ import axios from 'axios';
 import upArrow from '../../../../images/UpArrow.jpg';
 import downArrow from '../../../../images/DownArrow.jpg';
 import Author from '../../postDetail/Author';
+import LinkContent from './LinkContent';
+import Votes from './Votes';
 
-const LinkPost = ({ post, deletePost, index }) => {
+const LinkPost = ({ post }) => {
   const [linkTitle, setlinkTitle] = useState('');
   const [linkImage, setlinkImage] = useState('');
   const [linkContent, setlinkContent] = useState('');
@@ -43,36 +45,21 @@ const LinkPost = ({ post, deletePost, index }) => {
   return (
     <div className="full-post-container">
       <div className="postcard-container">
-        <div className="card-vote-containter">
+        <div className="card-vote-container">
           {/* {props.isLoggedIn ? ( */}
           <div>
-            <div className="arrow-container">
-              <button onClick={handleUpvote}>
-                <img src={upArrow} className="upvote" alt="Up Arrow" />
-              </button>
-              <button onClick={handleDownvote}>
-                <img src={downArrow} className="upvote" alt="Down Arrow" />
-              </button>
-            </div>
+            <Votes handleUpvote={handleUpvote} handleDownvote={handleDownvote} id={id} />
           </div>
-          <div>
-            <a href={linkUrl}>
-              <b>{linkTitle}</b>
-              {linkImage ? <img src={linkImage} alt={title} /> : <p>Sorry This Link Isn't Available Right Now</p>}
-              <p>{linkContent}</p>
-              <Author author={_author.username} date={new Date(created_at).toDateString()} />
-              <p>
-                {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
-              </p>
-            </a>
-            <button
-              onClick={() => {
-                deletePost(index);
-              }}
-            >
-              Delete
-            </button>
-          </div>
+          <LinkContent
+            id={id}
+            url={linkUrl}
+            title={title}
+            content={linkContent}
+            image={linkImage}
+            author={_author.username}
+            date={created_at}
+            upvotes={upvote_count}
+          />
         </div>
       </div>
     </div>

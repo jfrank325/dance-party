@@ -4,7 +4,8 @@ import axios from 'axios';
 import PostForm from './PostForm';
 import PostsList from './postList/PostsList';
 import Search from './Search';
-import Pencil from '../../images/Pencil.png';
+import Sort from './Sort';
+import Pencil from '../../images/Pencil1.png';
 
 const Posts = (props) => {
   const [posts, setPosts] = useState([]);
@@ -33,11 +34,11 @@ const Posts = (props) => {
     getData();
   };
 
-  const deletePost = (index) => {
-    const withoutPost = [...posts];
-    withoutPost.splice(index, 1);
-    setPosts(withoutPost);
-  };
+  // const deletePost = (id) => {
+  //   const withoutPost = [...posts];
+  //   withoutPost.splice(id, 1);
+  //   setPosts(withoutPost);
+  // };
 
   const executeSearch = () => {
     let filteredPosts = [...posts].filter((post) =>
@@ -59,7 +60,8 @@ const Posts = (props) => {
       <Search updateSearchText={(text) => setQuery(text)} executeSearch={executeSearch} query={query} />
       <div className="content-container">
         <div className="create-sort-container">
-          <div className="">
+          <Sort sortByNewest={sortByNewest} sortByUpvotes={sortByUpvotes} sortByCommentCount={sortByCommentCount} />
+          {/* <div className="">
             <button className="sort-button" onClick={sortByNewest}>
               Newest
             </button>{' '}
@@ -69,7 +71,7 @@ const Posts = (props) => {
             <button className="sort-button" onClick={sortByCommentCount}>
               Comments
             </button>
-          </div>
+          </div> */}
           <div>
             {props.user && !createPost ? (
               <div id="create-container">
@@ -100,7 +102,7 @@ const Posts = (props) => {
             )}
           </div>
         </div>
-        <PostsList posts={posts} deletePost={deletePost} />
+        <PostsList posts={posts} />
       </div>
     </div>
   );
