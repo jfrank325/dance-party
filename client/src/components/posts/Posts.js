@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PostForm from './PostForm';
 import PostsList from './postList/PostsList';
-import Search from './postList/Search';
-import Pencil from '../images/Pencil1.png';
+import Search from './Search';
+import Pencil from '../../images/Pencil.png';
 
 const Posts = (props) => {
   const [posts, setPosts] = useState([]);

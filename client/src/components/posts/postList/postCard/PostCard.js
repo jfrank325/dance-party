@@ -2,7 +2,7 @@ import React from 'react';
 import NormalPost from './NormalPost';
 import LinkPost from './LinkPost';
 
-const PostCard = ({ post, deletePost }) => {
+const PostCard = ({ post, deletePost, index }) => {
   // const [linkTitle, setlinkTitle] = useState('');
   // const [linkImage, setlinkImage] = useState('');
   // const [linkContent, setlinkContent] = useState('');
@@ -90,9 +90,9 @@ const PostCard = ({ post, deletePost }) => {
   //   </div>
   // );
   return !post.link ? (
-    <NormalPost deletePost={deletePost} post={post} />
+    <NormalPost deletePost={deletePost} post={post} index={index} />
   ) : (
-    <LinkPost deletePost={deletePost} post={post} />
+    <LinkPost deletePost={deletePost} post={post} index={index} />
     /* <div className="full-post-container">
       <div className="postcard-container">
         <div className="card-vote-container">

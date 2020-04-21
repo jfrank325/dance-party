@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 // import './button/Button.css';
 // import Content from './Content';
 import Author from './Author';
-import downArrow from '../../images/DownArrow.jpg';
-import upArrow from '../../images/UpArrow.jpg';
+import downArrow from '../../../images/DownArrow.jpg';
+import upArrow from '../../../images/UpArrow.jpg';
 // import { set } from 'mongoose';
 
 const PostDetail = (props) => {

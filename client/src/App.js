@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar.js';
-import Posts from './components/Posts.js';
-import PostDetail from './components/postDetail/PostDetail.js';
+import Posts from './components/posts/Posts';
+import PostDetail from './components/posts/postDetail/PostDetail';
 import Signup from './components/Signup.js';
 import Login from './components/Login.js';
 class App extends React.Component {

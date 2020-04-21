@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import upArrow from '../../../images/UpArrow.jpg';
-import downArrow from '../../../images/DownArrow.jpg';
+import upArrow from '../../../../images/UpArrow.jpg';
+import downArrow from '../../../../images/DownArrow.jpg';
 import Author from '../../postDetail/Author';
 
-const LinkPost = ({ post, deletePost }) => {
+const LinkPost = ({ post, deletePost, index }) => {
   const [linkTitle, setlinkTitle] = useState('');
   const [linkImage, setlinkImage] = useState('');
   const [linkContent, setlinkContent] = useState('');
@@ -65,13 +65,13 @@ const LinkPost = ({ post, deletePost }) => {
                 {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
               </p>
             </a>
-            {/* <button
+            <button
               onClick={() => {
                 deletePost(index);
               }}
             >
               Delete
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
