@@ -69,47 +69,48 @@ const PostDetail = (props) => {
   const { _id, title, content, image, video, _author, created_at, upvote_count, comments } = post;
   return (
     <div className="full-post-container">
-      <div>
-        {props.isLoggedIn ? (
-          <div className="arrow-container">
-            <button onClick={handleUpvote}>
-              <img src={upArrow} className="upvote" alt="Up Arrow" />
-            </button>
-            <button onClick={handleDownvote}>
-              <img src={downArrow} className="upvote" alt="Down Arrow" />
-            </button>
+      <div className="postcard-container">
+        <div className="card-vote-container">
+          <div>
+            {props.isLoggedIn ? (
+              <div className="arrow-container">
+                <button onClick={handleUpvote}>
+                  <img src={upArrow} className="upvote" alt="Up Arrow" />
+                </button>
+                <button onClick={handleDownvote}>
+                  <img src={downArrow} className="upvote" alt="Down Arrow" />
+                </button>
+              </div>
+            ) : (
+              <Link to="/login">Login to upvote this post</Link>
+            )}
           </div>
-        ) : (
-          <Link to="/login">Login to upvote this post</Link>
-        )}
-      </div>
-      <div key={_id} className="postcard-container">
-        <b>{title}</b>
-        <p>{content}</p>
-        <img src={image} alt="" />
-        {video ? <video autoPlay loop muted src={video} controls controlsList="nodownload" /> : <> </>}
-
-        <Author author={_author.username} />
-
-        <span>on {new Date(created_at).toDateString()}</span>
-        <p>
-          {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
-        </p>
-        {showComments &&
-          comments.map((comment, index) => (
-            <div>
-              <p key={index}>{comment.message}</p>
-            </div>
-          ))}
-        {showComments ? (
-          <button onClick={toggleShowComments}>Hide Comments</button>
-        ) : (
-          <button onClick={toggleShowComments}>Show Comments</button>
-        )}
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="comment">Comments: {'    '}</label>
-          <input name="comment" value={message} onChange={(text) => setMessage(text.target.value)} type="text" />
-        </form>
+          <div key={_id} className="">
+            <b>{title}</b>
+            <p>{content}</p>
+            <img src={image} alt="" />
+            {video ? <video autoPlay loop muted src={video} controls controlsList="nodownload" /> : <> </>}
+            <Author author={_author.username} date={new Date(created_at).toDateString()} />
+            <p>
+              {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
+            </p>
+            {showComments &&
+              comments.map((comment, index) => (
+                <div>
+                  <p key={index}>{comment.message}</p>
+                </div>
+              ))}
+            {showComments ? (
+              <button onClick={toggleShowComments}>Hide Comments</button>
+            ) : (
+              <button onClick={toggleShowComments}>Show Comments</button>
+            )}
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="comment">Comments: {'    '}</label>
+              <input name="comment" value={message} onChange={(text) => setMessage(text.target.value)} type="text" />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

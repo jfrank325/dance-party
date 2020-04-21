@@ -1,5 +1,5 @@
 import React from 'react';
-import PostCard from './PostCard';
+import PostCard from './postCard/PostCard';
 
 const PostsList = ({ posts, deletePost }) => {
   return (

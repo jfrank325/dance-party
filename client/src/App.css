@@ -202,6 +202,7 @@ b {
 .full-post-container {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .postcard-container {
@@ -210,13 +211,17 @@ b {
   padding: 1.2rem;
   border-bottom: 1px solid rgb(219, 219, 219);
   text-align: left;
-
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .postcard-container:hover {
   box-shadow: 2px 3px 3px rgb(219, 219, 219);
   font-size: 100.5%;
+}
+
+.card-vote-container {
+  display: flex;
+  align-items: center;
 }
 
 .button {
