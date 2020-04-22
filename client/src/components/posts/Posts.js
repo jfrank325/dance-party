@@ -52,7 +52,6 @@ const Posts = (props) => {
   const toggleCreatePost = () => {
     setCreatePost(!createPost);
   };
-  console.log('these are the posts in posts', posts);
 
   return (
     <div>
@@ -65,17 +64,6 @@ const Posts = (props) => {
       <div className="content-container">
         <div className="create-sort-container">
           <Sort sortByNewest={sortByNewest} sortByUpvotes={sortByUpvotes} sortByCommentCount={sortByCommentCount} />
-          {/* <div className="">
-            <button className="sort-button" onClick={sortByNewest}>
-              Newest
-            </button>{' '}
-            <button className="sort-button" onClick={sortByUpvotes}>
-              Upvotes
-            </button>
-            <button className="sort-button" onClick={sortByCommentCount}>
-              Comments
-            </button>
-          </div> */}
           <div>
             {props.user && !createPost ? (
               <div id="create-container">
