@@ -36,7 +36,7 @@ const NormalPost = ({ post, deletePost }) => {
             {/* <Link to="/login">Login to upvote this post</Link> */}
             {/* )} */}
           </div>
-          <NormalContent post={thisPost} deletePost={deleteThisPost} />
+          <NormalContent post={post} deletePost={deleteThisPost} />
           {/* <button onClick={() => deleteThisPost(id)}>Try this delete</button> */}
         </div>
       </div>

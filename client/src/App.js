@@ -6,6 +6,7 @@ import Posts from './components/posts/Posts';
 import PostDetail from './components/posts/postDetail/PostDetail';
 import Signup from './components/Signup.js';
 import Login from './components/Login.js';
+import Profile from './components/profile/Profile';
 class App extends React.Component {
   state = {
     user: this.props.user,
@@ -38,6 +39,7 @@ class App extends React.Component {
           <Route path="/login" render={(props) => <Login history={props.history} setUser={this.setUser} />} />
 
           <Route exact path="/" render={(props) => <Posts {...props} user={this.state.user} />} />
+          <Route path="/profile" render={() => <Profile user={this.state.user} />} />
           <Route
             exact
             path="/posts/:postId"

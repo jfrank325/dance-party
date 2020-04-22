@@ -18,6 +18,7 @@ const Navbar = ({ user, setUser }) => {
         </Link>
         <h1>DanceParty</h1>
         <div className="auth-links">
+          <Link to="/profile">Profile</Link>
           <Link onClick={logout} to="/">
             Logout
           </Link>

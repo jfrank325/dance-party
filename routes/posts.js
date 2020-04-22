@@ -178,6 +178,16 @@ router.post('/posts/:id/upvote', (req, res) => {
     });
 });
 
+router.get('/userposts', (req, res) => {
+  Post.find(req.user._id)
+    .then((posts) => {
+      res.json(posts);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+});
+
 router.post('/posts/:id/delete', (req, res) => {
   const query = { _id: req.params.id };
   Post.deleteOne(query)

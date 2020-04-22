@@ -42,8 +42,8 @@ const Posts = (props) => {
   const executeSearch = () => {
     let filteredPosts = [...posts].filter((post) =>
       post.content
-        ? post.content.toLowerCase() && post.title.toLowerCase().includes(query)
-        : post.title.toLowerCase().includes(query)
+        ? post.content.toLowerCase() && post.title.toLowerCase().includes(query.toLowerCase())
+        : post.title.toLowerCase().includes(query.toLowerCase())
     );
     query ? setPosts(filteredPosts) : setPosts(posts);
     setQuery('');
@@ -56,7 +56,12 @@ const Posts = (props) => {
 
   return (
     <div>
-      <Search updateSearchText={(text) => setQuery(text)} executeSearch={executeSearch} query={query} />
+      <Search
+        updateSearchText={(text) => setQuery(text)}
+        executeSearch={executeSearch}
+        query={query}
+        refresh={getData}
+      />
       <div className="content-container">
         <div className="create-sort-container">
           <Sort sortByNewest={sortByNewest} sortByUpvotes={sortByUpvotes} sortByCommentCount={sortByCommentCount} />
