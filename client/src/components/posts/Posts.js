@@ -21,11 +21,6 @@ const Posts = (props) => {
     setPosts(res.data.reverse());
   };
 
-  // const getNewestPosts = async () => {
-  //   const res = axios.get('/api/posts?sortBy=created_at');
-  //   setPosts(res.data);
-  // };
-
   const sortByUpvotes = () => setPosts([...posts].sort((a, b) => b.upvote_count - a.upvote_count));
 
   const sortByCommentCount = () => setPosts([...posts].sort((a, b) => b.comments.length - a.comments.length));
@@ -45,7 +40,7 @@ const Posts = (props) => {
         ? post.content.toLowerCase() && post.title.toLowerCase().includes(query.toLowerCase())
         : post.title.toLowerCase().includes(query.toLowerCase())
     );
-    query ? setPosts(filteredPosts) : setPosts(posts);
+    query.length > 0 ? setPosts(filteredPosts) : getData();
     setQuery('');
   };
 
@@ -55,12 +50,7 @@ const Posts = (props) => {
 
   return (
     <div>
-      <Search
-        updateSearchText={(text) => setQuery(text)}
-        executeSearch={executeSearch}
-        query={query}
-        refresh={getData}
-      />
+      <Search updateSearchText={(text) => setQuery(text)} executeSearch={executeSearch} query={query} />
       <div className="content-container">
         <div className="create-sort-container">
           <Sort sortByNewest={sortByNewest} sortByUpvotes={sortByUpvotes} sortByCommentCount={sortByCommentCount} />
@@ -72,7 +62,7 @@ const Posts = (props) => {
               </div>
             ) : props.user ? (
               <div className="postform-container">
-                <PostForm refresh={getData} />
+                <PostForm refresh={() => getData()} closeForm={toggleCreatePost} />
                 <button onClick={toggleCreatePost} className="dot">
                   ↩
                 </button>
@@ -94,7 +84,7 @@ const Posts = (props) => {
             )}
           </div>
         </div>
-        <PostsList posts={posts} deletePost={deletePost} />
+        <PostsList posts={posts} user={props.user} deletePost={deletePost} />
       </div>
     </div>
   );

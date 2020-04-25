@@ -1,12 +1,15 @@
 import React from 'react';
 
-const ProfileSort = ({ getUserPosts, getUpVoted }) => (
+const ProfileSort = ({ getUserPosts, getUpVoted, getSaved }) => (
   <div className="">
     <button className="sort-button" onClick={getUserPosts}>
-      Your Posts
+      Yours
     </button>{' '}
+    <button className="sort-button" onClick={getSaved}>
+      Saved
+    </button>
     <button className="sort-button" onClick={getUpVoted}>
-      Posts You've Upvoted
+      Upvoted
     </button>
   </div>
 );

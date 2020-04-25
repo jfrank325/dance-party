@@ -44,9 +44,14 @@ const Navbar = ({ user, setUser }) => {
           </div>
         )}
         {!user && expanded && (
-          <div className="auth-links">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+          <div className="link-container">
+            <div className="auth-links">
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </div>
+            <button onClick={() => expander()}>
+              <img src={RightArrow} style={{ width: '20px' }} alt="left arrow" />
+            </button>
           </div>
         )}
       </nav>

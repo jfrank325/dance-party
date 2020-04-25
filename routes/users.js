@@ -1,74 +1,101 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const passport = require("passport");
-const User = require("../models/User");
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const User = require('../models/User');
 
 /* Here we'll write the routes dedicated to handle the user logic (auth) */
 
-router.post("/signup", (req, res) => {
+router.get('/user/:id', (req, res) => {
+  const userId = req.params.id;
+  User.findById(userId)
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
+
+// router.get('/posts/:id', (req, res) => {
+//   const postId = req.params.id;
+//   Post.findById(postId)
+//     .populate('_author')
+//     .populate('comments')
+//     .then((post) => {
+//       res.json(post);
+//     })
+//     .catch((err) => {
+//       res.status(500).json({
+//         message: err.message,
+//       });
+//     });
+// });
+
+router.post('/signup', (req, res) => {
   const { username, password } = req.body;
 
   if (!username) {
     return res.status(400).json({ message: "Username can't be empty" });
   }
   if (password.length < 8) {
-    return res.status(400).json({ message: "Password is too short" });
+    return res.status(400).json({ message: 'Password is too short' });
   }
 
   User.findOne({ username: username })
-    .then(found => {
+    .then((found) => {
       if (found) {
-        return res.status(400).json({ message: "Username is already taken" });
+        return res.status(400).json({ message: 'Username is already taken' });
       }
       return bcrypt
         .genSalt()
-        .then(salt => {
+        .then((salt) => {
           return bcrypt.hash(password, salt);
         })
-        .then(hash => {
+        .then((hash) => {
           return User.create({ username: username, password: hash });
         })
-        .then(newUser => {
+        .then((newUser) => {
           // passport login
-          req.login(newUser, err => {
-            if (err)
-              res.status(500).json({ message: "Error while logging in" });
+          req.login(newUser, (err) => {
+            if (err) res.status(500).json({ message: 'Error while logging in' });
             else res.json(newUser);
           });
         });
     })
-    .catch(err => {
-      res.status(500).json({ message: "Error while authorizing" });
+    .catch((err) => {
+      res.status(500).json({ message: 'Error while authorizing' });
     });
 });
 
-router.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
-      return res.status(500).json({ message: "Error while authenticating" });
+      return res.status(500).json({ message: 'Error while authenticating' });
     }
     if (!user) {
       // no user found with username or password didn't match
       return res.status(400).json({ message: info.message });
     }
     // passport req.login
-    req.login(user, err => {
+    req.login(user, (err) => {
       if (err) {
-        return res.status(500).json({ message: "Error while logging in" });
+        return res.status(500).json({ message: 'Error while logging in' });
       }
       res.json(user);
     });
   })(req, res, next);
 });
 
-router.delete("/logout", (req, res) => {
+router.delete('/logout', (req, res) => {
   // passport logout function
   req.logout();
-  res.json({ message: "Successful logout" });
+  res.json({ message: 'Successful logout' });
 });
 
-router.get("/loggedin", (req, res) => {
+router.get('/loggedin', (req, res) => {
   res.json(req.user);
 });
 

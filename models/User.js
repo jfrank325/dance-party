@@ -9,7 +9,7 @@ const userSchema = new Schema(
       unique: true,
     },
     password: String,
-    posts: [
+    _savedposts: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Post',

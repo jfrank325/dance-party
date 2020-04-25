@@ -1,7 +1,7 @@
 import React from 'react';
 // import MagGlass from '../../images/Mag.png';
 
-const Search = ({ updateSearchText, executeSearch, query, refresh }) => {
+const Search = ({ updateSearchText, executeSearch, query }) => {
   const handleChange = (e) => {
     updateSearchText(e.target.value);
   };

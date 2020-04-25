@@ -47,12 +47,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
 }
 
 .navbar h1 {
   font-family: 'Lobster';
   color: rgb(241, 102, 52);
   font-size: 2rem;
+  display: flex;
+  justify-self: center;
 }
 .navbar a {
   color: whitesmoke;
@@ -78,6 +81,7 @@ a {
 
 b {
   color: deepskyblue;
+  font-size: x-large;
 }
 
 .App {
@@ -97,7 +101,7 @@ b {
   border-radius: 5px;
   width: 30%;
   margin-top: 1rem;
-  margin: 1rem auto;
+  margin: 5rem auto 1rem;
   background: white;
   padding: 2px;
 }
@@ -118,6 +122,7 @@ b {
 .search-inner-container {
   display: flex;
   color: black;
+  align-items: center;
 }
 
 .content-container {
@@ -224,13 +229,39 @@ b {
 }
 
 .postcard-container:hover {
-  box-shadow: 2px 3px 3px rgb(219, 219, 219);
+  box-shadow: 3px 3px 3px 3px rgb(219, 219, 219);
   font-size: 100.5%;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  font-size: small;
 }
 
 .card-vote-container {
   display: flex;
   align-items: center;
+}
+
+.post-content {
+  width: 50rem;
+}
+
+.bottom-content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.delete-save-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .button {
@@ -253,6 +284,14 @@ b {
   width: 30px;
   padding: 10px;
   margin: 20px;
+}
+
+.post-detail-container {
+  margin-top: 5rem;
+}
+
+.comments-container {
+  margin-top: 10rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -278,5 +317,9 @@ b {
     margin: 1.8rem 1rem 0.5rem 1rem;
     padding: 0.5rem;
     font-size: 0.8rem;
+  }
+
+  .post-content {
+    width: 80%;
   }
 }

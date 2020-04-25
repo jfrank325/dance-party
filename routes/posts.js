@@ -151,6 +151,20 @@ router.post('/posts/:id/upvote', (req, res) => {
     });
 });
 
+router.post('/posts/:id/save', (req, res, next) => {
+  const postId = req.params.id;
+  const user = req.user.id;
+
+  User.updateOne({ _id: user }, { $addToSet: { _savedposts: postId } })
+    .exec()
+    .then((res) => {
+      res.json({ message: 'saved' });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 router.post('/posts/:id/upvote', (req, res) => {
   const postId = req.params.id;
 
@@ -178,15 +192,6 @@ router.post('/posts/:id/upvote', (req, res) => {
     });
 });
 
-router.get('/userposts', (req, res) => {
-  Post.find(req.user._id)
-    .then((posts) => {
-      res.json(posts);
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err.message });
-    });
-});
 
 router.post('/posts/:id/delete', (req, res) => {
   const query = { _id: req.params.id };

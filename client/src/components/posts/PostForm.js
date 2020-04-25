@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const PostForm = ({ refresh }) => {
+const PostForm = ({ refresh, closeForm }) => {
   const [state, setState] = useState({
     title: '',
     content: '',
@@ -65,8 +65,9 @@ const PostForm = ({ refresh }) => {
       })
       .then(() => {
         console.log('Response received, calling getData in <Posts/>');
-        refresh();
         setState({ ...state, title: '', content: '', link: '', type: 'text' });
+        closeForm();
+        refresh();
       });
   };
 

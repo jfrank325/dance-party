@@ -3,9 +3,9 @@ import axios from 'axios';
 import NormalContent from './NormalContent';
 import Votes from './Votes';
 
-const NormalPost = ({ post, deletePost }) => {
+const NormalPost = ({ post, deletePost, user }) => {
   const [thisPost, setThisPost] = useState(post);
-  const { _id, title, content, image, video, upvote_count, _author, created_at } = thisPost;
+  const { title, content, image, video, upvote_count, _author, created_at } = thisPost;
   const id = post._id;
 
   const handleUpvote = async () => {
@@ -19,25 +19,35 @@ const NormalPost = ({ post, deletePost }) => {
   };
 
   const deleteThisPost = () => {
-    axios.post(`/api/posts/${id}/delete`);
-    deletePost(id);
-    // console.log(res);
+    if (user._id === _author._id) {
+      axios.post(`/api/posts/${id}/delete`);
+      deletePost(id);
+    }
+  };
+
+  const saveThisPost = () => {
+    axios.post(`/api/posts/${id}/save`);
   };
 
   return (
     <div className="full-post-container">
       <div className="postcard-container">
         <div className="card-vote-container">
-          <div>
-            {/* {props.isLoggedIn ? ( */}
+          <div className="votes">
             <Votes handleUpvote={handleUpvote} handleDownvote={handleDownvote} id={id} />
-
-            {/* ) : ( */}
-            {/* <Link to="/login">Login to upvote this post</Link> */}
-            {/* )} */}
           </div>
-          <NormalContent post={post} deletePost={deleteThisPost} />
-          {/* <button onClick={() => deleteThisPost(id)}>Try this delete</button> */}
+          <NormalContent
+            id={id}
+            title={title}
+            content={content}
+            author={_author}
+            image={image}
+            video={video}
+            upvoteCount={upvote_count}
+            createdAt={created_at}
+            deletePost={deleteThisPost}
+            savePost={saveThisPost}
+          />
         </div>
       </div>
     </div>

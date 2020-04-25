@@ -3,7 +3,7 @@ import axios from 'axios';
 import LinkContent from './LinkContent';
 import Votes from './Votes';
 
-const LinkPost = ({ post, deletePost }) => {
+const LinkPost = ({ post, deletePost, user }) => {
   const [linkTitle, setlinkTitle] = useState(post.title);
   const [linkImage, setlinkImage] = useState('');
   const [linkContent, setlinkContent] = useState('');
@@ -33,24 +33,41 @@ const LinkPost = ({ post, deletePost }) => {
       setlinkImage(res.data.image);
       setlinkContent(res.data.description);
       setLinkUrl(res.data.url);
-      // console.log(res);
     };
     if (post.link) {
       getPreview();
     }
   }, [post.link]);
 
+  // useEffect(() => {
+  //   axios
+  //     .post('/api/posts', {
+  //       title: linkTitle,
+  //       content: linkContent,
+  //       image: linkImage,
+  //       url: linkUrl,
+  //       _author: post.author,
+  //     })
+  //     .then(() => {
+  //       console.log('posted link data');
+  //     });
+  // }, [linkUrl, linkContent, linkImage, linkTitle]);
+
   const deleteThisPost = () => {
-    axios.post(`/api/posts/${id}/delete`);
-    deletePost(id);
-    // console.log(res);
+    if (user._id === _author._id) {
+      axios.post(`/api/posts/${id}/delete`);
+      deletePost(id);
+    }
+  };
+
+  const saveThisPost = () => {
+    axios.post(`/api/posts/${id}/save`);
   };
 
   return (
     <div className="full-post-container">
       <div className="postcard-container">
         <div className="card-vote-container">
-          {/* {props.isLoggedIn ? ( */}
           <div>
             <Votes handleUpvote={handleUpvote} handleDownvote={handleDownvote} id={id} />
           </div>
@@ -64,6 +81,7 @@ const LinkPost = ({ post, deletePost }) => {
             date={created_at}
             upvotes={upvote_count}
             deletePost={deleteThisPost}
+            savePost={saveThisPost}
           />
         </div>
       </div>
