@@ -43,7 +43,7 @@ class App extends React.Component {
           <Route
             exact
             path="/posts/:postId"
-            render={(props) => <PostDetail {...props} isLoggedIn={Boolean(this.state.user)} />}
+            render={(props) => <PostDetail {...props} isLoggedIn={Boolean(this.state.user)} user={this.state.user} />}
           />
         </div>
       </div>

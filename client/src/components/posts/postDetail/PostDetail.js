@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Author from './Author';
-import downArrow from '../../../images/DownArrow.jpg';
-import upArrow from '../../../images/UpArrow.jpg';
+// import downArrow from '../../../images/DownArrow.jpg';
+// import upArrow from '../../../images/UpArrow.jpg';
+import Bin from '../../../images/Bin.png';
+import Save from '../../../images/SaveFlag.png';
+import Votes from '../postList/postCard/Votes';
 
 const PostDetail = (props) => {
   const [post, setPost] = useState(null);
@@ -33,6 +36,16 @@ const PostDetail = (props) => {
   const handleDownvote = async () => {
     const res = await axios.post(`/api/posts/${id}/upvote`);
     setPost(res.data);
+  };
+
+  const deletePost = (id) => {
+    if (props.user._id === post._author._id) {
+      axios.post(`/api/posts/${id}/delete`);
+    }
+  };
+
+  const savePost = () => {
+    axios.post(`/api/posts/${id}/save`);
   };
 
   const handleSubmit = (e) => {
@@ -67,53 +80,60 @@ const PostDetail = (props) => {
         <div className="postcard-container">
           <div className="card-vote-container">
             <div>
-              <div className="arrow-container">
-                <button onClick={handleUpvote}>
-                  <img src={upArrow} className="upvote" alt="Up Arrow" />
-                </button>
-                <button onClick={handleDownvote}>
-                  <img src={downArrow} className="upvote" alt="Down Arrow" />
-                </button>
-              </div>
+              <Votes handleDownvote={handleDownvote} handleUpvote={handleUpvote} id={id} />
             </div>
-            <div key={_id} className="">
+            <div key={_id} className="post-content">
               <b>{title}</b>
               <p>{content}</p>
               <img src={image} alt="" />
               {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
-              <Author author={_author.username} date={new Date(created_at).toDateString()} />
+              <Author
+                author={_author.username}
+                date={new Date(created_at).toDateString()}
+                time={new Date(created_at).toTimeString().slice(0, 8)}
+              />{' '}
               <p>
                 {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
               </p>
-              <div className="comments-container">
-                <h3 style={{ color: 'coral' }}>Comments</h3>
-                {showComments
-                  ? comments.map((comment, index) => (
-                      <div>
-                        <p key={index}>{comment.message}</p>
-                      </div>
-                    ))
-                  : comments.slice(0, 5).map((comment, index) => (
-                      <div>
-                        <p key={index}>{comment.message}</p>
-                      </div>
-                    ))}
-                {showComments ? (
-                  <button onClick={toggleShowComments}>Hide Comments</button>
-                ) : (
-                  <button onClick={toggleShowComments} style={{ color: 'deepskyblue' }}>
-                    ...
+              <div className="bin-comments-container">
+                <div className="delete-save-container">
+                  <button onClick={() => deletePost(id)}>
+                    <img style={{ width: '30px' }} src={Bin} alt="delete" />
                   </button>
-                )}
-                <form onSubmit={handleSubmit}>
-                  <input
-                    style={{ border: ' 2px solid deepskyblue ' }}
-                    name="comment"
-                    value={message}
-                    onChange={(text) => setMessage(text.target.value)}
-                    type="text"
-                  />
-                </form>
+                  <button onClick={() => savePost(id)}>
+                    <img style={{ width: '50px' }} src={Save} alt="Save" />
+                  </button>
+                </div>
+                <div className="comments-container">
+                  <h3 style={{ color: 'coral' }}>Comments</h3>
+                  {showComments
+                    ? comments.map((comment, index) => (
+                        <div>
+                          <p key={index}>{comment.message}</p>
+                        </div>
+                      ))
+                    : comments.slice(0, 5).map((comment, index) => (
+                        <div>
+                          <p key={index}>{comment.message}</p>
+                        </div>
+                      ))}
+                  {showComments ? (
+                    <button onClick={toggleShowComments}>Hide Comments</button>
+                  ) : (
+                    <button onClick={toggleShowComments} style={{ color: 'deepskyblue' }}>
+                      ...
+                    </button>
+                  )}
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      style={{ border: ' 2px solid deepskyblue ' }}
+                      name="comment"
+                      value={message}
+                      onChange={(text) => setMessage(text.target.value)}
+                      type="text"
+                    />
+                  </form>
+                </div>
               </div>
             </div>
           </div>
