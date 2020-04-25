@@ -21,12 +21,12 @@ const NormalContent = ({ deletePost, savePost, ...props }) => {
             time={new Date(createdAt).toTimeString().slice(0, 8)}
           />
         </div>
+        <img src={image} alt="" />
+        {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
         <p>
           {content.slice(0, 100)}
           {content.length > 101 && '...'}
         </p>
-        <img src={image} alt="" />
-        {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
       </Link>
       <div className="bottom-content-container">
         <p>

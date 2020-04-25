@@ -108,13 +108,13 @@ const PostDetail = (props) => {
                   <h3 style={{ color: 'coral' }}>Comments</h3>
                   {showComments
                     ? comments.map((comment, index) => (
-                        <div>
-                          <p key={index}>{comment.message}</p>
+                        <div style={{ marginBottom: '12px' }}>
+                          <p key={index}>-{comment.message}</p>
                         </div>
                       ))
                     : comments.slice(0, 5).map((comment, index) => (
-                        <div>
-                          <p key={index}>{comment.message}</p>
+                        <div style={{ marginBottom: '12px' }}>
+                          <p key={index}>-{comment.message}</p>
                         </div>
                       ))}
                   {showComments ? (
