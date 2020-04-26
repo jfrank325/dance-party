@@ -16,7 +16,7 @@ const NormalContent = ({ deletePost, savePost, ...props }) => {
             {title.length > 41 && '...'}
           </b>
           <Author
-            author={author.username}
+            author={author}
             date={new Date(createdAt).toDateString()}
             time={new Date(createdAt).toTimeString().slice(0, 8)}
           />

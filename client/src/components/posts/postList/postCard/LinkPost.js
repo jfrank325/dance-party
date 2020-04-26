@@ -81,7 +81,7 @@ const LinkPost = ({ post, deletePost, user }) => {
             title={linkTitle}
             content={linkContent}
             image={linkImage}
-            author={_author.username}
+            author={_author}
             date={created_at}
             upvotes={upvote_count}
             deletePost={deleteThisPost}

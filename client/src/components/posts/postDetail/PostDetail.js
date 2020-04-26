@@ -19,6 +19,7 @@ const PostDetail = (props) => {
     const getPost = async () => {
       const res = await axios.get(`/api/posts/${id}`);
       setPost(res.data);
+      console.log('this is the author if detail', res.data._author);
     };
     getPost();
   }, [id]);
@@ -88,7 +89,7 @@ const PostDetail = (props) => {
               <img src={image} alt="" />
               {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
               <Author
-                author={_author.username}
+                author={_author}
                 date={new Date(created_at).toDateString()}
                 time={new Date(created_at).toTimeString().slice(0, 8)}
               />{' '}
