@@ -27,35 +27,21 @@ const LinkPost = ({ post, deletePost, user }) => {
     }
   };
 
-  useEffect(() => {
-    const getPreview = async () => {
-      const res = await axios.post('https://api.linkpreview.net', {
-        q: post.link,
-        key: process.env.REACT_APP_LINK_PREVIEW_KEY,
-      });
-      setlinkTitle(res.data.title);
-      setlinkImage(res.data.image);
-      setlinkContent(res.data.description);
-      setLinkUrl(res.data.url);
-    };
-    if (post.link) {
-      getPreview();
-    }
-  }, [post.link]);
-
   // useEffect(() => {
-  //   axios
-  //     .post('/api/posts', {
-  //       title: linkTitle,
-  //       content: linkContent,
-  //       image: linkImage,
-  //       url: linkUrl,
-  //       _author: post.author,
-  //     })
-  //     .then(() => {
-  //       console.log('posted link data');
+  //   const getPreview = async () => {
+  //     const res = await axios.post('https://api.linkpreview.net', {
+  //       q: post.link,
+  //       key: process.env.REACT_APP_LINK_PREVIEW_KEY,
   //     });
-  // }, [linkUrl, linkContent, linkImage, linkTitle]);
+  //     setlinkTitle(res.data.title);
+  //     setlinkImage(res.data.image);
+  //     setlinkContent(res.data.description);
+  //     setLinkUrl(res.data.url);
+  //   };
+  //   if (post.link) {
+  //     getPreview();
+  //   }
+  // }, [post.link]);
 
   const deleteThisPost = () => {
     if (user._id === _author._id) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PostForm = ({ refresh, closeForm }) => {
@@ -47,6 +47,24 @@ const PostForm = ({ refresh, closeForm }) => {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
+
+  useEffect(() => {
+    const handleLink = async () => {
+      const res = await axios.post('https://api.linkpreview.net', {
+        q: state.link,
+        key: process.env.REACT_APP_LINK_PREVIEW_KEY,
+      });
+      setState({
+        ...state,
+        title: res.data.title,
+        image: res.data.image,
+        content: res.data.description,
+        url: res.data.url,
+      });
+      console.log(res.data);
+    };
+    handleLink();
+  }, [state.link]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
