@@ -33,10 +33,10 @@ const NormalContent = ({ deletePost, savePost, ...props }) => {
           {upvoteCount} {upvoteCount === 1 ? 'Upvote' : 'Upvotes'}
         </p>
         <div className="delete-save-container">
-          <button onClick={() => deletePost(id)}>
+          <button className="image-button" onClick={() => deletePost(id)}>
             <img style={{ width: '30px' }} src={Bin} alt="delete" />
           </button>
-          <button onClick={() => savePost(id)}>
+          <button className="image-button" onClick={() => savePost(id)}>
             <img style={{ width: '50px' }} src={Save} alt="Save" />
           </button>
         </div>

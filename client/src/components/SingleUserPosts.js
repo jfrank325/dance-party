@@ -17,7 +17,7 @@ const SingleUserPosts = (props) => {
       setPosts(res.data._posts.reverse());
     };
     getData();
-  }, []);
+  }, [id]);
 
   const getData = async () => {
     const res = await axios.get(`/api/posts/authored/${id}`);

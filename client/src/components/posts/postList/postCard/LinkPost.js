@@ -14,13 +14,17 @@ const LinkPost = ({ post, deletePost, user }) => {
   const id = post._id;
 
   const handleUpvote = async () => {
-    const res = await axios.post(`/api/posts/${id}/upvote`);
-    setThisPost(res.data);
+    if (user) {
+      const res = await axios.post(`/api/posts/${id}/upvote`);
+      setThisPost(res.data);
+    }
   };
 
   const handleDownvote = async () => {
-    const res = await axios.post(`/api/posts/${id}/upvote`);
-    setThisPost(res.data);
+    if (user) {
+      const res = await axios.post(`/api/posts/${id}/upvote`);
+      setThisPost(res.data);
+    }
   };
 
   useEffect(() => {

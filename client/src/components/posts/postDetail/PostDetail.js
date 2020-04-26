@@ -19,7 +19,6 @@ const PostDetail = (props) => {
     const getPost = async () => {
       const res = await axios.get(`/api/posts/${id}`);
       setPost(res.data);
-      console.log('post?', res.data, 'user', props.user);
     };
     getPost();
   }, [id]);
