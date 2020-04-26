@@ -8,7 +8,7 @@ import ProfileSort from './ProfileSort';
 const Profile = ({ user }) => {
   const [posts, setPosts] = useState([]);
   const [query, setQuery] = useState('');
-  const [sortedPosts, setSortedPosts] = useState([]);
+  // const [sortedPosts, setSortedPosts] = useState([]);
 
   useEffect(() => {
     getPosts();
@@ -17,18 +17,23 @@ const Profile = ({ user }) => {
   const getPosts = async () => {
     const res = await axios.get('api/posts');
     setPosts(res.data);
+    console.log(res.data);
   };
 
-  const userPosts = () => setSortedPosts([...posts].filter((post) => post._author._id === user._id));
+  const userPosts = () => {
+    setPosts([...posts].filter((post) => post._author._id === user._id));
+    console.log([...posts].filter((post) => post._author._id === user._id));
+  };
 
-  const upVotedPosts = () => setSortedPosts([...posts].filter((post) => user._upvotes.includes(post._id)));
+  const upVotedPosts = () => {
+    setPosts([...posts].filter((post) => user._upvotes.includes(post._id)));
+    console.log([...posts].filter((post) => user._upvotes.includes(post._id)));
+  };
 
-  const savedPosts = () => setSortedPosts([...posts].filter((post) => user._savedposts.includes(post._id)));
-
-  // const getUpVoted = async () => {
-  //   const res = await axios.get('api/posts');
-  //   setPosts(upVotedPosts);
-  // };
+  const savedPosts = () => {
+    setPosts([...posts].filter((post) => user._savedposts.includes(post._id)));
+    console.log([...posts].filter((post) => user._savedposts.includes(post._id)));
+  };
 
   const deletePost = (id) => {
     setPosts([...posts].filter((post) => id !== post._id));
@@ -53,7 +58,7 @@ const Profile = ({ user }) => {
           <ProfileSort getUserPosts={userPosts} getUpVoted={upVotedPosts} getSaved={savedPosts} />
         </div>
       </div>
-      <PostsList posts={sortedPosts.length > 0 ? sortedPosts : posts} deletePost={deletePost} />
+      <PostsList posts={posts} deletePost={deletePost} />
     </div>
   );
 };

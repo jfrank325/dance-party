@@ -9,6 +9,12 @@ const userSchema = new Schema(
       unique: true,
     },
     password: String,
+    _posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
     _savedposts: [
       {
         type: Schema.Types.ObjectId,
@@ -19,6 +25,12 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: 'Post',
+      },
+    ],
+    _comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
       },
     ],
   },

@@ -22,6 +22,7 @@ router.get('/posts', (req, res) => {
 
   Post.find()
     // .sort(sort)
+    // .populate('comments.author')
     .populate('_author')
     .limit(30)
     .then((posts) => {
@@ -39,11 +40,10 @@ router.get('/posts', (req, res) => {
 //   if(req.query.sortBy)
 // })
 
-router.get('/posts/:id', (req, res) => {
-  const postId = req.params.id;
-  Post.findById(postId)
-    .populate('_author')
-    .populate('comments')
+router.get('/posts/authored/:id', (req, res) => {
+  const userId = req.params.id;
+  User.findById(userId)
+    .populate('_posts')
     .then((post) => {
       res.json(post);
     })
@@ -54,6 +54,21 @@ router.get('/posts/:id', (req, res) => {
     });
 });
 
+router.get('/posts/:id', (req, res) => {
+  const postId = req.params.id;
+  Post.findById(postId)
+    .populate('_author')
+    .populate({ path: 'comments', ref: 'author', populate: { path: 'author', model: 'User' } })
+    .then((post) => {
+      res.json(post);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
+// populate({ path: 'members', select: 'name' }).
 router.post('/posts', (req, res) => {
   // Todo: add a middleware to protect this route from non-logged in users
   // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
@@ -72,7 +87,9 @@ router.post('/posts', (req, res) => {
     _author: req.user._id,
   })
     .then((postDocument) => {
+      const postId = postDocument._id;
       res.json(postDocument);
+      User.updateOne({ _id: req.user._id }, { $push: { _posts: postId } }).exec();
     })
     .catch((err) => {
       res.status(500).json({
@@ -93,6 +110,7 @@ router.post('/posts/:id/comments', (req, res, next) => {
     .then((commentDocument) => {
       const commentId = commentDocument._id;
       return Post.updateOne({ _id: postId }, { $push: { comments: commentId } });
+      // User.updateOne({ _id: author }, { $push: { _comments: commentId } })
     })
     .then(() => {
       res.json({});
@@ -106,9 +124,9 @@ router.get('/posts/:id/comments', (req, res, next) => {
   Post.findById(req.params.id)
     .populate({
       path: 'comments',
-      // populate: {
-      //   path: '_author',
-      // },
+      populate: {
+        path: 'author',
+      },
     })
     .then((post) => {
       const comments = post.comments.map((comment) => {
@@ -191,7 +209,6 @@ router.post('/posts/:id/upvote', (req, res) => {
       });
     });
 });
-
 
 router.post('/posts/:id/delete', (req, res) => {
   const query = { _id: req.params.id };

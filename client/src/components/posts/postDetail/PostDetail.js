@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Author from './Author';
 // import downArrow from '../../../images/DownArrow.jpg';
 // import upArrow from '../../../images/UpArrow.jpg';
@@ -18,7 +19,7 @@ const PostDetail = (props) => {
     const getPost = async () => {
       const res = await axios.get(`/api/posts/${id}`);
       setPost(res.data);
-      console.log('post?', res.data);
+      console.log('post?', res.data, 'user', props.user);
     };
     getPost();
   }, [id]);
@@ -107,16 +108,31 @@ const PostDetail = (props) => {
                 <div className="comments-container">
                   <h3 style={{ color: 'coral' }}>Comments</h3>
                   {showComments
-                    ? comments.map((comment, index) => (
-                        <div style={{ marginBottom: '12px' }}>
-                          <p key={index}>-{comment.message}</p>
+                    ? comments.reverse().map((comment) => (
+                        <div key={comment._id} style={{ marginBottom: '12px' }}>
+                          <p>
+                            {comment.message}
+                            {'  '}
+                            <span style={{ color: 'deepskyblue' }}>
+                              <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
+                            </span>
+                          </p>
                         </div>
                       ))
-                    : comments.slice(0, 5).map((comment, index) => (
-                        <div style={{ marginBottom: '12px' }}>
-                          <p key={index}>-{comment.message}</p>
-                        </div>
-                      ))}
+                    : comments
+                        .reverse()
+                        .slice(0, 5)
+                        .map((comment) => (
+                          <div key={comment._id} style={{ marginBottom: '12px' }}>
+                            <p>
+                              {comment.message}
+                              {'   '}
+                              <span style={{ color: 'deepskyblue' }}>
+                                <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
+                              </span>
+                            </p>
+                          </div>
+                        ))}
                   {showComments ? (
                     <button onClick={toggleShowComments}>Hide Comments</button>
                   ) : (
