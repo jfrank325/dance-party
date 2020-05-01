@@ -1,6 +1,6 @@
 import React from 'react';
-import upArrow from '../../../../images/UpArrow.jpg';
-import downArrow from '../../../../images/DownArrow.jpg';
+import upArrow from '../../../images/UpArrow.jpg';
+import downArrow from '../../../images/DownArrow.jpg';
 
 const Votes = ({ id, handleDownvote, handleUpvote }) => (
   <div className="arrow-container">

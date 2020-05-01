@@ -24,6 +24,7 @@ router.get('/posts', (req, res) => {
     // .sort(sort)
     // .populate('comments.author')
     .populate('_author')
+    .populate({ path: 'comments', ref: 'author', populate: { path: 'author', model: 'User' } })
     .limit(30)
     .then((posts) => {
       res.json(posts);

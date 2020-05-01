@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PostForm from './PostForm';
-import PostsList from './postList/PostsList';
+import PostsList from './postDetail/PostsList';
 import Search from './Search';
 import Sort from './Sort';
 import Pencil from '../../images/Pencil1.png';

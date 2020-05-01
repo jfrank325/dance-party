@@ -196,6 +196,9 @@ b {
   background: var(--sunrise);
 }
 
+#create-container button:hover {
+  color: var(--white);
+}
 /* PostForm */
 
 .postform-container {

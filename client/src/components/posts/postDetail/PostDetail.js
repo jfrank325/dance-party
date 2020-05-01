@@ -2,46 +2,52 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Author from './Author';
-// import downArrow from '../../../images/DownArrow.jpg';
-// import upArrow from '../../../images/UpArrow.jpg';
 import Bin from '../../../images/Bin.png';
 import Save from '../../../images/SaveFlag.png';
-import Votes from '../postList/postCard/Votes';
+import Votes from './Votes';
 
-const PostDetail = (props) => {
-  const [post, setPost] = useState(null);
+const PostDetail = ({ post, deletePost, user }) => {
+  const [thisPost, setThisPost] = useState(post);
   const [message, setMessage] = useState('');
   const [showComments, setShowComments] = useState(false);
 
-  const id = props.match.params.postId;
+  const { title, content, image, video, comments, upvote_count, _author, created_at } = thisPost;
+  const id = post._id;
 
-  useEffect(() => {
-    const getPost = async () => {
-      const res = await axios.get(`/api/posts/${id}`);
-      setPost(res.data);
-      console.log('this is the author if detail', res.data._author);
-    };
-    getPost();
-  }, [id]);
+  // const id = props.match.params.postId;
 
-  const getPost = async () => {
+  // useEffect(() => {
+  //   const getPost = async () => {
+  //     const res = await axios.get(`/api/posts/${id}`);
+  //     setThisPost(res.data);
+  //     console.log('this is the author if detail', res.data._author);
+  //   };
+  //   getPost();
+  // }, [id]);
+
+  const getThisPost = async () => {
     const res = await axios.get(`/api/posts/${id}`);
-    setPost(res.data);
+    setThisPost(res.data);
   };
 
   const handleUpvote = async () => {
-    const res = await axios.post(`/api/posts/${id}/upvote`);
-    setPost(res.data);
+    if (user) {
+      const res = await axios.post(`/api/posts/${id}/upvote`);
+      setThisPost(res.data);
+    }
   };
 
   const handleDownvote = async () => {
-    const res = await axios.post(`/api/posts/${id}/upvote`);
-    setPost(res.data);
+    if (user) {
+      const res = await axios.post(`/api/posts/${id}/upvote`);
+      setThisPost(res.data);
+    }
   };
 
-  const deletePost = (id) => {
-    if (props.user._id === post._author._id) {
+  const deleteThisPost = (id) => {
+    if (user._id === post._author._id) {
       axios.post(`/api/posts/${id}/delete`);
+      deletePost(id);
     }
   };
 
@@ -57,8 +63,8 @@ const PostDetail = (props) => {
         message: message,
       })
       .then(() => {
-        getPost();
         setMessage('');
+        getThisPost();
       })
 
       .catch((err) => {
@@ -74,7 +80,7 @@ const PostDetail = (props) => {
     return <div>Loading...</div>;
   }
 
-  const { _id, title, content, image, video, _author, created_at, upvote_count, comments } = post;
+  // const { _id, title, content, image, video, _author, created_at, upvote_count, comments } = post;
   return (
     <div className="post-detail-container">
       <div className="full-post-container">
@@ -83,7 +89,7 @@ const PostDetail = (props) => {
             <div>
               <Votes handleDownvote={handleDownvote} handleUpvote={handleUpvote} id={id} />
             </div>
-            <div key={_id} className="post-content">
+            <div key={id} className="post-content">
               <b>{title}</b>
               <img src={image} alt="" />
               {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
@@ -98,7 +104,7 @@ const PostDetail = (props) => {
               </p>
               <div className="bin-comments-container">
                 <div className="delete-save-container">
-                  <button onClick={() => deletePost(id)}>
+                  <button onClick={() => deleteThisPost(id)}>
                     <img style={{ width: '30px' }} src={Bin} alt="delete" />
                   </button>
                   <button onClick={() => savePost(id)}>

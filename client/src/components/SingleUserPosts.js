@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PostsList from './posts/postList/PostsList';
+import PostsList from './posts/postDetail/PostsList';
 import Search from './posts/Search';
 import Sort from './posts/Sort';
 
