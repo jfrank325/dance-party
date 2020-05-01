@@ -1,14 +1,26 @@
 /* Color */
+
+:root {
+  /* Primary */
+  --sunrise: rgb(255, 98, 41); /* Primary call to action color */
+  --sky: #129fe6; /* Secondary call to action color */
+  --white: whitesmoke;
+}
+
+*:focus {
+  outline: none;
+}
+
+*:active {
+  outline: none;
+}
+
 body {
-  background: whitesmoke;
+  background: var(--white);
 }
 
 .light-blue {
-  color: deepskyblue;
-}
-
-.orange {
-  color: rgb(241, 102, 52);
+  color: var(--sky);
 }
 
 /* Login */
@@ -21,7 +33,7 @@ body {
 
 .auth-input {
   margin-top: 1rem;
-  color: deepskyblue;
+  color: var(--sky);
   font-weight: 800;
   height: 2rem;
 }
@@ -31,7 +43,7 @@ body {
 }
 
 .login-form button {
-  border: 3px solid deepskyblue;
+  border: 3px solid var(--sky);
   border-radius: 20px;
   background: white;
   width: 10rem;
@@ -41,7 +53,7 @@ body {
 /* Navbar */
 
 .navbar {
-  background-color: deepskyblue;
+  background-color: var(--sky);
   min-height: 50px;
   width: 100%;
   display: flex;
@@ -52,7 +64,7 @@ body {
 
 .navbar h1 {
   font-family: 'Lobster';
-  color: rgb(241, 102, 52);
+  color: var(--sunrise);
   font-size: 2rem;
   display: flex;
   justify-self: center;
@@ -60,6 +72,10 @@ body {
 .navbar a {
   color: whitesmoke;
   padding: 0 15px;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .navbar img {
@@ -80,7 +96,7 @@ a {
 }
 
 b {
-  color: deepskyblue;
+  color: var(--sky);
   font-size: x-large;
 }
 
@@ -97,7 +113,7 @@ b {
 
 /* Search */
 .search-container {
-  /* border: 2px solid deepskyblue; */
+  /* border: 2px solid var(--sky); */
   border-radius: 5px;
   width: 30%;
   margin-top: 1rem;
@@ -163,7 +179,7 @@ b {
   font-size: large;
   font-weight: 800;
   display: flex;
-  background: coral;
+  background: var(--sunrise);
   padding: 0.3rem;
   border-radius: 5px;
   width: 10rem;
@@ -177,14 +193,14 @@ b {
 
 #create-container:hover {
   color: white;
-  background: #ff6a33;
+  background: var(--sunrise);
 }
 
 /* PostForm */
 
 .postform-container {
   min-width: 50vw;
-  background: coral;
+  background: var(--sunrise);
   color: white;
   padding: 0.3rem;
   border-radius: 5px;
@@ -206,7 +222,7 @@ b {
 /* Sort  */
 
 .sort-button {
-  border-left: 2px solid deepskyblue;
+  border-left: 2px solid var(--sky);
   margin: 1.8rem 1rem 0.5rem 1rem;
   padding: 0.8rem;
 }
@@ -268,7 +284,7 @@ b {
   margin-top: 1rem;
   font-size: large;
   font-weight: 800;
-  background: deepskyblue;
+  background: var(--sky);
   padding: 0.3rem;
   border-radius: 5px;
   color: white;
@@ -290,6 +306,11 @@ b {
   margin-top: 5rem;
 }
 
+.post-content {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 .bin-comments-container {
   display: flex;
   flex-direction: row-reverse;
@@ -298,7 +319,11 @@ b {
 }
 
 .comments-container {
-  margin-top: 10rem;
+  margin-top: 5rem;
+}
+
+.comments-container h3 {
+  color: var(--sunrise);
 }
 
 @media screen and (max-width: 600px) {
@@ -320,7 +345,7 @@ b {
   }
 
   .sort-button {
-    border-left: 2px solid deepskyblue;
+    border-left: 2px solid var(--sky);
     margin: 1.8rem 1rem 0.5rem 1rem;
     padding: 0.5rem;
     font-size: 0.8rem;

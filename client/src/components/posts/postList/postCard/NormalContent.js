@@ -23,7 +23,7 @@ const NormalContent = ({ deletePost, savePost, ...props }) => {
         </div>
         <img src={image} alt="" />
         {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
-        <p>
+        <p className="post-content">
           {content && content.slice(0, 100)}
           {content && content.length > 101 && '...'}
         </p>

@@ -85,7 +85,6 @@ const PostDetail = (props) => {
             </div>
             <div key={_id} className="post-content">
               <b>{title}</b>
-              <p>{content}</p>
               <img src={image} alt="" />
               {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
               <Author
@@ -93,6 +92,7 @@ const PostDetail = (props) => {
                 date={new Date(created_at).toDateString()}
                 time={new Date(created_at).toTimeString().slice(0, 8)}
               />{' '}
+              <p className="post-content">{content}</p>
               <p>
                 {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
               </p>
@@ -106,7 +106,7 @@ const PostDetail = (props) => {
                   </button>
                 </div>
                 <div className="comments-container">
-                  <h3 style={{ color: 'coral' }}>Comments</h3>
+                  <h3>Comments</h3>
                   {showComments
                     ? comments.reverse().map((comment) => (
                         <div key={comment._id} style={{ marginBottom: '12px' }}>

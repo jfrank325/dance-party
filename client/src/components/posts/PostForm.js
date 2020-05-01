@@ -10,7 +10,7 @@ const PostForm = ({ refresh, closeForm }) => {
     image: '',
     video: '',
     url: '',
-    loading: 'false',
+    loading: 'waiting',
   });
 
   const uploadImage = async (e) => {
@@ -18,7 +18,7 @@ const PostForm = ({ refresh, closeForm }) => {
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'gagwud8b');
-    setState({ ...state, loading: true });
+    setState({ ...state, loading: 'loading' });
 
     const res = await fetch('	https://api.cloudinary.com/v1_1/dv1aih6td/image/upload', {
       method: 'POST',
@@ -26,7 +26,7 @@ const PostForm = ({ refresh, closeForm }) => {
     });
     const file = await res.json();
 
-    setState({ ...state, image: file.secure_url, loading: false });
+    setState({ ...state, image: file.secure_url, loading: 'finished' });
   };
 
   const uploadVideo = async (e) => {
@@ -34,14 +34,14 @@ const PostForm = ({ refresh, closeForm }) => {
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'gagwud8b');
-    setState({ ...state, loading: true });
+    setState({ ...state, loading: 'loading' });
     const res = await fetch('	https://api.cloudinary.com/v1_1/dv1aih6td/video/upload', {
       method: 'POST',
       body: data,
     });
     const file = await res.json();
 
-    setState({ ...state, video: file.secure_url, loading: false });
+    setState({ ...state, video: file.secure_url, loading: 'finished' });
   };
 
   const handleChange = (event) => {
@@ -93,7 +93,7 @@ const PostForm = ({ refresh, closeForm }) => {
 
   return (
     <form className="create-post" encType="multipart/form-data" onSubmit={handleSubmit}>
-      <label htmlFor="title">Title</label>
+      <label htmlFor="title">Title*</label>
       <input id="title" name="title" value={title} onChange={handleChange} />
       <label htmlFor="link">Link</label>
       <input id="link" name="link" value={link} onChange={handleChange} />
@@ -105,7 +105,13 @@ const PostForm = ({ refresh, closeForm }) => {
         <input type="file" name="imgPath" onChange={uploadImage} />
         <label htmlFor="videoPath">Upload Video</label>
         <input type="file" name="videoPath" onChange={uploadVideo} />
-        {state.loading && state.title ? <div className="donut"></div> : <h4>Finished</h4>}
+        {state.loading === 'loading' ? (
+          <div className="donut"></div>
+        ) : state.loading === 'finished' ? (
+          <h4>Finished</h4>
+        ) : (
+          <> </>
+        )}
       </div>
       {/* <select value={type} name="type" onChange={handleChange}>
         <option value="link">Link</option>
