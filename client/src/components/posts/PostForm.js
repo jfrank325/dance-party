@@ -61,7 +61,6 @@ const PostForm = ({ refresh, closeForm }) => {
         content: res.data.description,
         url: res.data.url,
       });
-      console.log(res.data);
     };
     handleLink();
   }, [state.link]);
@@ -95,10 +94,10 @@ const PostForm = ({ refresh, closeForm }) => {
     <form className="create-post" encType="multipart/form-data" onSubmit={handleSubmit}>
       <label htmlFor="title">Title*</label>
       <input id="title" name="title" value={title} onChange={handleChange} />
-      <label htmlFor="link">Link</label>
-      <input id="link" name="link" value={link} onChange={handleChange} />
       <label htmlFor="content">Content</label>
       <input id="content" name="content" value={content} onChange={handleChange} />
+      <label htmlFor="link">Link</label>
+      <input id="link" name="link" value={link} onChange={handleChange} />
       {/* <label htmlFor="type">Type</label> */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <label htmlFor="imgPath">Upload Image</label>

@@ -69,7 +69,7 @@ router.get('/posts/:id', (req, res) => {
       });
     });
 });
-// populate({ path: 'members', select: 'name' }).
+
 router.post('/posts', (req, res) => {
   // Todo: add a middleware to protect this route from non-logged in users
   // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';

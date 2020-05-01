@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar.js';
 import Posts from './components/posts/Posts';
-import PostDetail from './components/posts/postDetail/PostDetail';
+import SinglePost from './components/posts/SinglePost';
 import Signup from './components/Signup.js';
 import Login from './components/Login.js';
 import Profile from './components/profile/Profile';
@@ -20,8 +20,6 @@ class App extends React.Component {
   };
 
   render() {
-    console.log('<App/> render: ', this.state.user);
-
     return (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
@@ -49,7 +47,7 @@ class App extends React.Component {
           <Route
             exact
             path="/posts/:postId"
-            render={(props) => <PostDetail {...props} isLoggedIn={Boolean(this.state.user)} user={this.state.user} />}
+            render={(props) => <SinglePost {...props} isLoggedIn={Boolean(this.state.user)} user={this.state.user} />}
           />
         </div>
       </div>

@@ -123,11 +123,12 @@ b {
 }
 
 .search-container i {
-  color: rgb(57, 200, 248);
+  color: var(--sky);
 }
 
 .search-container:hover {
-  border: 3px solid rgb(57, 200, 248);
+  border: 3px solid var(--sky);
+  transition: border 0.3s ease;
 }
 
 .search-input {
@@ -167,7 +168,7 @@ b {
 .donut {
   display: inline-block;
   border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #7983ff;
+  border-left-color: var(--sky);
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -199,6 +200,11 @@ b {
 #create-container button:hover {
   color: var(--white);
 }
+
+#create-container img:hover {
+  transform: rotate(360deg);
+  transition: transform 2s ease;
+}
 /* PostForm */
 
 .postform-container {
@@ -222,12 +228,22 @@ b {
   margin-top: 0.8rem;
 }
 
+#content {
+  height: 5rem;
+}
+
 /* Sort  */
 
 .sort-button {
   border-left: 2px solid var(--sky);
   margin: 1.8rem 1rem 0.5rem 1rem;
   padding: 0.8rem;
+  font-size: initial;
+}
+
+.sort-button:hover {
+  padding: 0.8rem 1.2rem 0.8rem 1.2rem;
+  transition: padding 1s ease;
 }
 
 /* PostCard */

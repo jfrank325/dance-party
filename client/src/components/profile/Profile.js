@@ -16,7 +16,7 @@ const Profile = ({ user }) => {
 
   const getPosts = async () => {
     const res = await axios.get('api/posts');
-    setPosts(res.data);
+    setPosts(res.data.reverse());
     console.log(res.data);
   };
 
@@ -33,6 +33,11 @@ const Profile = ({ user }) => {
   const savedPosts = () => {
     setPosts([...posts].filter((post) => user._savedposts.includes(post._id)));
     console.log([...posts].filter((post) => user._savedposts.includes(post._id)));
+  };
+
+  const commentedPosts = () => {
+    setPosts([...posts].filter((post) => post.comments.includes(user._id)));
+    console.log([...posts].filter((post) => post.comments.includes(user._id)));
   };
 
   const deletePost = (id) => {
@@ -55,7 +60,12 @@ const Profile = ({ user }) => {
       <Search updateSearchText={(text) => setQuery(text)} executeSearch={executeSearch} query={query} />
       <div className="content-container">
         <div className="create-sort-container">
-          <ProfileSort getUserPosts={userPosts} getUpVoted={upVotedPosts} getSaved={savedPosts} />
+          <ProfileSort
+            getUserPosts={userPosts}
+            getUpVoted={upVotedPosts}
+            getSaved={savedPosts}
+            commented={commentedPosts}
+          />
         </div>
       </div>
       <PostsList posts={posts} deletePost={deletePost} />

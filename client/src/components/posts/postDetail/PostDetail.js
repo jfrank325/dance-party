@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Author from './Author';
@@ -90,9 +90,11 @@ const PostDetail = ({ post, deletePost, user }) => {
               <Votes handleDownvote={handleDownvote} handleUpvote={handleUpvote} id={id} />
             </div>
             <div key={id} className="post-content">
-              <b>{title}</b>
-              <img src={image} alt="" />
-              {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
+              <Link to={`/posts/${id}`}>
+                <b>{title}</b>
+                <img src={image} alt="" />
+                {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
+              </Link>
               <Author
                 author={_author}
                 date={new Date(created_at).toDateString()}
@@ -158,6 +160,11 @@ const PostDetail = ({ post, deletePost, user }) => {
                 </div>
               </div>
             </div>
+            {/* <div>
+              <a href={link} rel="noreferrer noopener" target="_blank">
+                <p>Go to link</p>
+              </a>
+            </div> */}
           </div>
         </div>
       </div>
