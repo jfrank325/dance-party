@@ -66,25 +66,23 @@ const PostForm = ({ refresh, closeForm }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log('Form submitted');
-
-    axios
-      .post('/api/posts', {
-        title: state.title,
-        type: state.type,
-        link: state.link,
-        content: state.content,
-        image: state.image,
-        video: state.video,
-        url: state.url,
-      })
-      .then(() => {
-        console.log('Response received, calling getData in <Posts/>');
-        setState({ ...state, title: '', content: '', link: '', type: 'text' });
-        closeForm();
-        refresh();
-      });
+    if (state.loading !== 'loading') {
+      axios
+        .post('/api/posts', {
+          title: state.title,
+          type: state.type,
+          link: state.link,
+          content: state.content,
+          image: state.image,
+          video: state.video,
+          url: state.url,
+        })
+        .then(() => {
+          setState({ ...state, title: '', content: '', link: '', type: 'text' });
+          closeForm();
+          refresh();
+        });
+    }
   };
 
   const { title, content, link } = state;
