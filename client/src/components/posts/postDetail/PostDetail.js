@@ -6,7 +6,7 @@ import BinSave from './BinSave';
 import Comments from './Comments';
 import Votes from './Votes';
 
-const PostDetail = ({ post, deletePost, user }) => {
+const PostDetail = ({ post, deletePost, user, postLink }) => {
   const [thisPost, setThisPost] = useState(post);
   const [message, setMessage] = useState('');
   const [showComments, setShowComments] = useState(false);
@@ -80,6 +80,7 @@ const PostDetail = ({ post, deletePost, user }) => {
             <div key={id} className="post-content">
               <Link to={`/posts/${id}`}>
                 <b>{title}</b>
+
                 <img src={image} alt="" />
                 {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
               </Link>
@@ -88,6 +89,13 @@ const PostDetail = ({ post, deletePost, user }) => {
                 date={new Date(created_at).toDateString()}
                 time={new Date(created_at).toTimeString().slice(0, 8)}
               />{' '}
+              {postLink && (
+                <div className="post-link">
+                  <a href={postLink} rel="noreferrer noopener" target="_blank">
+                    <p>Go to link </p>
+                  </a>
+                </div>
+              )}
               <p className="post-content">{content}</p>
               <p>
                 {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
@@ -106,11 +114,6 @@ const PostDetail = ({ post, deletePost, user }) => {
                 )}
               </div>
             </div>
-            {/* <div>
-              <a href={link} rel="noreferrer noopener" target="_blank">
-                <p>Go to link</p>
-              </a>
-            </div> */}
           </div>
         </div>
       </div>

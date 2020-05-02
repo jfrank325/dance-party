@@ -346,6 +346,12 @@ b {
   margin-bottom: 1rem;
 }
 
+.post-link {
+  color: var(--sunrise);
+  font-size: 110%;
+  padding-top: 2rem;
+}
+
 .bin-comments-container {
   display: flex;
   flex-direction: row-reverse;

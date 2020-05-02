@@ -11,7 +11,6 @@ const SinglePost = ({ user, ...props }) => {
     const getPost = async () => {
       const res = await axios.get(`/api/posts/${id}`);
       setPost(res.data);
-      console.log('data!!!!!', res.data);
     };
     getPost();
   }, [id]);
@@ -19,7 +18,7 @@ const SinglePost = ({ user, ...props }) => {
   return (
     <div>
       {' '}
-      <PostDetail post={post} user={props.user} />{' '}
+      <PostDetail post={post} user={user} postLink={post.link} />{' '}
     </div>
   );
 };
