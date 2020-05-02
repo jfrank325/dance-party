@@ -18,7 +18,7 @@
 
 body {
   background: var(--white);
-  font-family: Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: ubuntu;
   letter-spacing: 0.03rem;
 }
 
@@ -391,7 +391,7 @@ b {
   border-radius: 5px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   * {
     font-size: 98%;
   }

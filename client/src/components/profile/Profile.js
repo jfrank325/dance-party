@@ -17,6 +17,7 @@ const Profile = ({ user }) => {
     const getUserPosts = async () => {
       const res = await axios.get(`/api/auth/user/${id}`);
       setUserPosts([...res.data._posts.reverse()]);
+      setPosts([...res.data._posts]);
       setUpvotedPosts([...res.data._upvotes.reverse()]);
       setSavedPosts([...res.data._savedposts.reverse()]);
     };
