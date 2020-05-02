@@ -9,6 +9,9 @@ const User = require('../models/User');
 router.get('/user/:id', (req, res) => {
   const userId = req.params.id;
   User.findById(userId)
+    .populate('_posts')
+    .populate('_upvotes')
+    .populate('_savedposts')
     .then((user) => {
       res.json(user);
     })
@@ -18,21 +21,6 @@ router.get('/user/:id', (req, res) => {
       });
     });
 });
-
-// router.get('/posts/:id', (req, res) => {
-//   const postId = req.params.id;
-//   Post.findById(postId)
-//     .populate('_author')
-//     .populate('comments')
-//     .then((post) => {
-//       res.json(post);
-//     })
-//     .catch((err) => {
-//       res.status(500).json({
-//         message: err.message,
-//       });
-//     });
-// });
 
 router.post('/signup', (req, res) => {
   const { username, password } = req.body;

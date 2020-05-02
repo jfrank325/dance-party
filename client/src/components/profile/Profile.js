@@ -8,41 +8,23 @@ import ProfileSort from './ProfileSort';
 const Profile = ({ user }) => {
   const [posts, setPosts] = useState([]);
   const [query, setQuery] = useState('');
-  // const [sortedPosts, setSortedPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
+  const [upvotedPosts, setUpvotedPosts] = useState([]);
+  const [savedPosts, setSavedPosts] = useState([]);
+  const id = user._id;
 
   useEffect(() => {
-    getPosts();
-  }, []);
-
-  const getPosts = async () => {
-    const res = await axios.get('api/posts');
-    setPosts(res.data.reverse());
-    console.log(res.data);
-  };
-
-  const userPosts = () => {
-    setPosts([...posts].filter((post) => post._author._id === user._id));
-    console.log([...posts].filter((post) => post._author._id === user._id));
-  };
-
-  const upVotedPosts = () => {
-    setPosts([...posts].filter((post) => user._upvotes.includes(post._id)));
-    console.log([...posts].filter((post) => user._upvotes.includes(post._id)));
-  };
-
-  const savedPosts = () => {
-    setPosts([...posts].filter((post) => user._savedposts.includes(post._id)));
-    console.log([...posts].filter((post) => user._savedposts.includes(post._id)));
-  };
-
-  const commentedPosts = () => {
-    setPosts([...posts].filter((post) => post.comments.includes(user._id)));
-    console.log([...posts].filter((post) => post.comments.includes(user._id)));
-  };
+    const getUserPosts = async () => {
+      const res = await axios.get(`/api/auth/user/${id}`);
+      setUserPosts([...res.data._posts.reverse()]);
+      setUpvotedPosts([...res.data._upvotes.reverse()]);
+      setSavedPosts([...res.data._savedposts.reverse()]);
+    };
+    getUserPosts();
+  }, [id]);
 
   const deletePost = (id) => {
     setPosts([...posts].filter((post) => id !== post._id));
-    getPosts();
   };
 
   const executeSearch = () => {
@@ -61,14 +43,13 @@ const Profile = ({ user }) => {
       <div className="content-container">
         <div className="create-sort-container">
           <ProfileSort
-            getUserPosts={userPosts}
-            getUpVoted={upVotedPosts}
-            getSaved={savedPosts}
-            commented={commentedPosts}
+            getUserPosts={() => setPosts(userPosts)}
+            getUpVoted={() => setPosts(upvotedPosts)}
+            getSaved={() => setPosts(savedPosts)}
           />
         </div>
       </div>
-      <PostsList posts={posts} deletePost={deletePost} />
+      <PostsList posts={posts} deletePost={deletePost} user={user} />
     </div>
   );
 };

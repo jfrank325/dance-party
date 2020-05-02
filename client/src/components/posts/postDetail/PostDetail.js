@@ -96,9 +96,11 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                   </a>
                 </div>
               )}
-              <p className="post-content">
-                {singlePost ? content : content.length > 300 ? content.slice(0, 300) + '...' : content}
-              </p>
+              {content && (
+                <p className="post-content">
+                  {singlePost ? content : content.length > 300 ? content.slice(0, 300) + '...' : content}
+                </p>
+              )}
               <p>
                 {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
               </p>

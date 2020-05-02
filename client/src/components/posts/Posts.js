@@ -19,7 +19,6 @@ const Posts = (props) => {
   const getData = async () => {
     const res = await axios.get('/api/posts');
     setPosts(res.data.reverse());
-    console.log('posts', res.data);
   };
 
   const sortByUpvotes = () => setPosts([...posts].sort((a, b) => b.upvote_count - a.upvote_count));
