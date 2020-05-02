@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import Uploads from './Uploads';
 
 const PostForm = ({ refresh, closeForm }) => {
   const [state, setState] = useState({
@@ -48,7 +49,6 @@ const PostForm = ({ refresh, closeForm }) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  // useEffect(() => {
   const handleLink = async (event) => {
     event.preventDefault();
     const res = await axios.post('https://api.linkpreview.net', {
@@ -63,8 +63,6 @@ const PostForm = ({ refresh, closeForm }) => {
       url: res.data.url,
     });
   };
-  //   handleLink();
-  // }, [state.link]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -102,24 +100,7 @@ const PostForm = ({ refresh, closeForm }) => {
       <button className="button" onClick={handleLink}>
         Automatically Generate Link Info
       </button>
-      {/* <label htmlFor="type">Type</label> */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <label htmlFor="imgPath">Upload Image</label>
-        <input type="file" name="imgPath" onChange={uploadImage} />
-        <label htmlFor="videoPath">Upload Video</label>
-        <input type="file" name="videoPath" onChange={uploadVideo} />
-        {state.loading === 'loading' ? (
-          <div className="donut"></div>
-        ) : state.loading === 'finished' ? (
-          <h4>Finished</h4>
-        ) : (
-          <> </>
-        )}
-      </div>
-      {/* <select value={type} name="type" onChange={handleChange}>
-        <option value="link">Link</option>
-        <option value="text">Text</option>
-      </select> */}
+      <Uploads uploadImage={uploadImage} uploadVideo={uploadVideo} loading={state.loading} />
       <button className="button" style={{ margin: '2rem auto 0 auto' }} onClick={refresh}>
         Submit Post
       </button>

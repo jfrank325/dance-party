@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PostDetail from './postDetail/PostDetail';
 
-const SinglePost = (props) => {
+const SinglePost = ({ user, ...props }) => {
   const [post, setPost] = useState('');
 
   const id = props.match.params.postId;
@@ -18,7 +18,8 @@ const SinglePost = (props) => {
 
   return (
     <div>
-      <PostDetail post={post} user={props.user} />
+      {' '}
+      <PostDetail post={post} user={props.user} />{' '}
     </div>
   );
 };

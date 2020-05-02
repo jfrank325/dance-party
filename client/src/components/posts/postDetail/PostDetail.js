@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Author from './Author';
-import Bin from '../../../images/Bin.png';
-import Save from '../../../images/SaveFlag.png';
+import BinSave from './BinSave';
+import Comments from './Comments';
 import Votes from './Votes';
 
 const PostDetail = ({ post, deletePost, user }) => {
@@ -11,19 +11,8 @@ const PostDetail = ({ post, deletePost, user }) => {
   const [message, setMessage] = useState('');
   const [showComments, setShowComments] = useState(false);
 
-  const { title, content, image, video, comments, upvote_count, _author, created_at } = thisPost;
+  const { title, content, image, video, comments, upvote_count, _author, created_at } = thisPost ? thisPost : post;
   const id = post._id;
-
-  // const id = props.match.params.postId;
-
-  // useEffect(() => {
-  //   const getPost = async () => {
-  //     const res = await axios.get(`/api/posts/${id}`);
-  //     setThisPost(res.data);
-  //     console.log('this is the author if detail', res.data._author);
-  //   };
-  //   getPost();
-  // }, [id]);
 
   const getThisPost = async () => {
     const res = await axios.get(`/api/posts/${id}`);
@@ -80,7 +69,6 @@ const PostDetail = ({ post, deletePost, user }) => {
     return <div>Loading...</div>;
   }
 
-  // const { _id, title, content, image, video, _author, created_at, upvote_count, comments } = post;
   return (
     <div className="post-detail-container">
       <div className="full-post-container">
@@ -105,59 +93,17 @@ const PostDetail = ({ post, deletePost, user }) => {
                 {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
               </p>
               <div className="bin-comments-container">
-                <div className="delete-save-container">
-                  <button onClick={() => deleteThisPost(id)}>
-                    <img style={{ width: '30px' }} src={Bin} alt="delete" />
-                  </button>
-                  <button onClick={() => savePost(id)}>
-                    <img style={{ width: '50px' }} src={Save} alt="Save" />
-                  </button>
-                </div>
-                <div className="comments-container">
-                  <h3>Comments</h3>
-                  {showComments
-                    ? comments.reverse().map((comment) => (
-                        <div key={comment._id} style={{ marginBottom: '12px' }}>
-                          <p>
-                            {comment.message}
-                            {'  '}
-                            <span style={{ color: 'deepskyblue' }}>
-                              <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
-                            </span>
-                          </p>
-                        </div>
-                      ))
-                    : comments
-                        .reverse()
-                        .slice(0, 5)
-                        .map((comment) => (
-                          <div key={comment._id} style={{ marginBottom: '12px' }}>
-                            <p>
-                              {comment.message}
-                              {'   '}
-                              <span style={{ color: 'deepskyblue' }}>
-                                <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
-                              </span>
-                            </p>
-                          </div>
-                        ))}
-                  {showComments ? (
-                    <button onClick={toggleShowComments}>Hide Comments</button>
-                  ) : (
-                    <button onClick={toggleShowComments} style={{ color: 'deepskyblue' }}>
-                      ...
-                    </button>
-                  )}
-                  <form onSubmit={handleSubmit}>
-                    <input
-                      style={{ border: ' 2px solid deepskyblue ' }}
-                      name="comment"
-                      value={message}
-                      onChange={(text) => setMessage(text.target.value)}
-                      type="text"
-                    />
-                  </form>
-                </div>
+                <BinSave deleteThisPost={deleteThisPost} savePost={savePost} id={id} />
+                {comments && (
+                  <Comments
+                    handleChange={(text) => setMessage(text.target.value)}
+                    comments={comments}
+                    handleSubmit={handleSubmit}
+                    toggleShowComments={toggleShowComments}
+                    message={message}
+                    showComments={showComments}
+                  />
+                )}
               </div>
             </div>
             {/* <div>

@@ -18,6 +18,7 @@
 body {
   background: var(--white);
   font-family: Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.03rem;
 }
 
 .light-blue {
@@ -227,11 +228,21 @@ b {
 
 .create-post label {
   margin-top: 0.8rem;
-  color: var(--sky);
+  color: var(--sunrise);
 }
 
 .create-post input {
-  background-color: var(--white);
+  border: solid 2px var(--sky);
+  border-radius: 5px;
+}
+
+.dot {
+  color: var(--sunrise);
+  font-size: 2rem;
+}
+
+.dot:focus {
+  outline: none;
 }
 
 #content {
@@ -350,7 +361,15 @@ b {
   color: var(--sunrise);
 }
 
+.comment-input {
+  border: solid 2px var(--sky);
+  border-radius: 5px;
+}
+
 @media screen and (max-width: 600px) {
+  * {
+    /* font-size: 95%; */
+  }
   .content-container {
     margin: 0 5%;
   }
