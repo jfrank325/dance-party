@@ -89,15 +89,15 @@ const PostForm = ({ refresh, closeForm }) => {
 
   return (
     <form className="create-post" encType="multipart/form-data" onSubmit={handleSubmit}>
+      <label htmlFor="title">Title*</label>
+      <input id="title" name="title" value={title} onChange={handleChange} />
+      <label htmlFor="content">Content</label>
+      <input id="content" name="content" value={content} onChange={handleChange} />
       <label htmlFor="link">Link</label>
       <input id="link" name="link" type="text" value={link} onChange={handleChange} />
       <button className="button" onClick={handleLink}>
         Automatically Generate Link Info
       </button>
-      <label htmlFor="title">Title*</label>
-      <input id="title" name="title" value={title} onChange={handleChange} />
-      <label htmlFor="content">Content</label>
-      <input id="content" name="content" value={content} onChange={handleChange} />
       <Uploads uploadImage={uploadImage} uploadVideo={uploadVideo} loading={state.loading} />
       <button className="button" style={{ margin: '2rem auto 0 auto' }} onClick={refresh}>
         Submit Post

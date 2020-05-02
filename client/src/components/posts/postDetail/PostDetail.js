@@ -104,7 +104,7 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
               </p>
               <div className="bin-comments-container">
                 <BinSave deleteThisPost={deleteThisPost} savePost={savePost} id={id} />
-                {comments && (
+                {comments && singlePost ? (
                   <Comments
                     handleChange={(text) => setMessage(text.target.value)}
                     comments={comments}
@@ -113,6 +113,8 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                     message={message}
                     showComments={showComments}
                   />
+                ) : (
+                  <Link to={`/posts/${id}`}>Comments</Link>
                 )}
               </div>
             </div>
