@@ -1,36 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../../src/images/fourSwans.png';
-import Burger from '../../src/images/BurgerIcon.png';
-import RightArrow from '../../src/images/RightArrow.png';
 
 const Navbar = ({ user, setUser }) => {
-  const [expanded, setExpanded] = useState(false);
-
   const logout = () => {
     axios.delete('/api/auth/logout').then(() => {
       setUser(null);
     });
   };
 
-  const expander = () => {
-    setExpanded(!expanded);
-  };
-
   return (
     <>
       <nav className="navbar">
+        <img src={Logo} alt="Logo" />
+
         <Link to="/">
-          <img src={Logo} alt="Logo" />
+          <h1>DanceParty</h1>
         </Link>
-        <h1>DanceParty</h1>
-        {!expanded && (
-          <button onClick={() => expander()}>
-            <img src={Burger} alt="" />
-          </button>
-        )}
-        {user && expanded && (
+        {user && (
           <div className="link-container">
             <div className="auth-links">
               <Link to="/profile">Profile</Link>
@@ -38,20 +26,14 @@ const Navbar = ({ user, setUser }) => {
                 Logout
               </Link>
             </div>
-            <button onClick={() => expander()}>
-              <img src={RightArrow} style={{ width: '20px' }} alt="left arrow" />
-            </button>
           </div>
         )}
-        {!user && expanded && (
+        {!user && (
           <div className="link-container">
             <div className="auth-links">
               <Link to="/login">Login</Link>
               <Link to="/signup">Signup</Link>
             </div>
-            <button onClick={() => expander()}>
-              <img src={RightArrow} style={{ width: '20px' }} alt="left arrow" />
-            </button>
           </div>
         )}
       </nav>

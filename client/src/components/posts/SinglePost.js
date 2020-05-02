@@ -5,20 +5,20 @@ import PostDetail from './postDetail/PostDetail';
 const SinglePost = ({ user, ...props }) => {
   const [post, setPost] = useState('');
 
-  const id = props.match.params.postId;
+  const postId = props.match.params.postId;
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get(`/api/posts/${id}`);
+      const res = await axios.get(`/api/posts/${postId}`);
       setPost(res.data);
     };
     getPost();
-  }, [id]);
+  }, [postId]);
 
   return (
     <div>
       {' '}
-      <PostDetail post={post} user={user} postLink={post.link} />{' '}
+      <PostDetail post={post} user={user} postLink={post.link} singlePost={postId} />{' '}
     </div>
   );
 };

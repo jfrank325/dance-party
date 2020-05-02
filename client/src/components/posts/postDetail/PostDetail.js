@@ -6,7 +6,7 @@ import BinSave from './BinSave';
 import Comments from './Comments';
 import Votes from './Votes';
 
-const PostDetail = ({ post, deletePost, user, postLink }) => {
+const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
   const [thisPost, setThisPost] = useState(post);
   const [message, setMessage] = useState('');
   const [showComments, setShowComments] = useState(false);
@@ -96,7 +96,9 @@ const PostDetail = ({ post, deletePost, user, postLink }) => {
                   </a>
                 </div>
               )}
-              <p className="post-content">{content}</p>
+              <p className="post-content">
+                {singlePost ? content : content.length > 300 ? content.slice(0, 300) + '...' : content}
+              </p>
               <p>
                 {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
               </p>
