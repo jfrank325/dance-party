@@ -6,7 +6,7 @@ const Uploads = ({ uploadImage, uploadVideo, loading }) => {
       <label htmlFor="imgPath">Upload Image</label>
       <input type="file" name="imgPath" onChange={uploadImage} />
       <label htmlFor="videoPath">Upload Video</label>
-      <input type="file" name="videoPath" onChange={uploadVideo} />
+      <input style={{ marginBottom: '2rem' }} type="file" name="videoPath" onChange={uploadVideo} />
       {loading === 'loading' ? <div className="donut"></div> : loading === 'finished' ? <h4>Finished</h4> : <> </>}
     </div>
   );
