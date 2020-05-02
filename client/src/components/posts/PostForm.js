@@ -48,22 +48,23 @@ const PostForm = ({ refresh, closeForm }) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  useEffect(() => {
-    const handleLink = async () => {
-      const res = await axios.post('https://api.linkpreview.net', {
-        q: state.link,
-        key: process.env.REACT_APP_LINK_PREVIEW_KEY,
-      });
-      setState({
-        ...state,
-        title: res.data.title,
-        image: res.data.image,
-        content: res.data.description,
-        url: res.data.url,
-      });
-    };
-    handleLink();
-  }, [state.link]);
+  // useEffect(() => {
+  const handleLink = async (event) => {
+    event.preventDefault();
+    const res = await axios.post('https://api.linkpreview.net', {
+      q: state.link,
+      key: process.env.REACT_APP_LINK_PREVIEW_KEY,
+    });
+    setState({
+      ...state,
+      title: res.data.title,
+      image: res.data.image,
+      content: res.data.description,
+      url: res.data.url,
+    });
+  };
+  //   handleLink();
+  // }, [state.link]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -97,7 +98,10 @@ const PostForm = ({ refresh, closeForm }) => {
       <label htmlFor="content">Content</label>
       <input id="content" name="content" value={content} onChange={handleChange} />
       <label htmlFor="link">Link</label>
-      <input id="link" name="link" value={link} onChange={handleChange} />
+      <input id="link" name="link" type="text" value={link} onChange={handleChange} />
+      <button className="button" onClick={handleLink}>
+        Automatically Generate Link Info
+      </button>
       {/* <label htmlFor="type">Type</label> */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <label htmlFor="imgPath">Upload Image</label>

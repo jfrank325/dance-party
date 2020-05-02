@@ -17,6 +17,7 @@
 
 body {
   background: var(--white);
+  font-family: Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .light-blue {
@@ -209,8 +210,8 @@ b {
 
 .postform-container {
   min-width: 50vw;
-  background: var(--sunrise);
-  color: white;
+  background: white;
+  color: var(--white);
   padding: 0.3rem;
   border-radius: 5px;
 }
@@ -226,6 +227,11 @@ b {
 
 .create-post label {
   margin-top: 0.8rem;
+  color: var(--sky);
+}
+
+.create-post input {
+  background-color: var(--white);
 }
 
 #content {
@@ -238,7 +244,6 @@ b {
   border-left: 2px solid var(--sky);
   margin: 1.8rem 1rem 0.5rem 1rem;
   padding: 0.8rem;
-  font-size: initial;
 }
 
 .sort-button:hover {
