@@ -11,6 +11,7 @@ const Profile = ({ user }) => {
   const [userPosts, setUserPosts] = useState([]);
   const [upvotedPosts, setUpvotedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
+  const [commented, setCommented] = useState([]);
   const id = user._id;
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const Profile = ({ user }) => {
       setPosts([...res.data._posts]);
       setUpvotedPosts([...res.data._upvotes.reverse()]);
       setSavedPosts([...res.data._savedposts.reverse()]);
+      setCommented([...res.data._comments]);
     };
     getUserPosts();
   }, [id]);
@@ -47,6 +49,7 @@ const Profile = ({ user }) => {
             getUserPosts={() => setPosts(userPosts)}
             getUpVoted={() => setPosts(upvotedPosts)}
             getSaved={() => setPosts(savedPosts)}
+            getCommented={() => setPosts([...commented].map((comment) => comment.post))}
           />
         </div>
       </div>
