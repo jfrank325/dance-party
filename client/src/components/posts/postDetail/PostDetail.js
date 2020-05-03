@@ -111,8 +111,9 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                 <BinSave deleteThisPost={deleteThisPost} savePost={savePost} id={id} />
                 {comments && singlePost ? (
                   <Comments
+                    setMessage={setMessage}
                     handleChange={(text) => setMessage(text.target.value)}
-                    comments={comments}
+                    comments={[...comments].reverse()}
                     handleSubmit={handleSubmit}
                     toggleShowComments={toggleShowComments}
                     message={message}

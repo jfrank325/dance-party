@@ -7,7 +7,7 @@ const Comments = (props) => {
     <div className="comments-container">
       <h3>Comments</h3>
       {showComments
-        ? comments.reverse().map((comment) => (
+        ? comments.map((comment) => (
             <div key={comment._id} style={{ marginBottom: '12px' }}>
               <p>
                 {comment.message}
@@ -18,20 +18,17 @@ const Comments = (props) => {
               </p>
             </div>
           ))
-        : comments
-            .reverse()
-            .slice(0, 5)
-            .map((comment) => (
-              <div key={comment._id} style={{ marginBottom: '12px' }}>
-                <p>
-                  {comment.message}
-                  {'   '}
-                  <span style={{ color: 'deepskyblue' }}>
-                    <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
-                  </span>
-                </p>
-              </div>
-            ))}
+        : comments.slice(0, 5).map((comment) => (
+            <div key={comment._id} style={{ marginBottom: '12px' }}>
+              <p>
+                {comment.message}
+                {'   '}
+                <span style={{ color: 'deepskyblue' }}>
+                  <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
+                </span>
+              </p>
+            </div>
+          ))}
       {showComments ? (
         <button onClick={toggleShowComments}>Hide Comments</button>
       ) : (
