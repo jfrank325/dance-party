@@ -92,7 +92,7 @@ const PostForm = ({ refresh, closeForm }) => {
       <label htmlFor="title">Title*</label>
       <input id="title" name="title" value={title} onChange={handleChange} />
       <label htmlFor="content">Content</label>
-      <input id="content" name="content" value={content} onChange={handleChange} />
+      <textarea rows="5" id="content" name="content" value={content} onChange={handleChange} />
       <label htmlFor="link">Link</label>
       <input id="link" name="link" type="text" value={link} onChange={handleChange} />
       <button className="button" onClick={handleLink}>

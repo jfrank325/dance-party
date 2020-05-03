@@ -239,6 +239,10 @@ b {
   color: black;
 }
 
+.postform-container textarea {
+  color: black;
+}
+
 .create-post {
   display: flex;
   flex-direction: column;
@@ -250,6 +254,11 @@ b {
 }
 
 .create-post input {
+  border: solid 2px var(--sky);
+  border-radius: 5px;
+}
+
+.create-post textarea {
   border: solid 2px var(--sky);
   border-radius: 5px;
 }
