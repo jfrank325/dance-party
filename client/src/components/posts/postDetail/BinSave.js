@@ -7,10 +7,10 @@ const BinSave = (props) => {
   return (
     <div className="delete-save-container">
       <button onClick={() => deleteThisPost(id)}>
-        <img style={{ width: '30px' }} src={Bin} alt="delete" />
+        <img className="bin" src={Bin} alt="delete" />
       </button>
       <button onClick={() => savePost(id)}>
-        <img style={{ width: '50px' }} src={Save} alt="Save" />
+        <img className="save" src={Save} alt="Save" />
       </button>
     </div>
   );

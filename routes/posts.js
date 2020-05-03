@@ -101,16 +101,17 @@ router.post('/posts', (req, res) => {
 
 router.post('/posts/:id/comments', (req, res, next) => {
   const message = req.body.message;
-  const postId = req.params.id;
+  const post = req.params.id;
   const author = req.user.id;
 
   Comments.create({
     message,
     author,
+    post,
   })
     .then((commentDocument) => {
       const commentId = commentDocument._id;
-      return Post.updateOne({ _id: postId }, { $push: { comments: commentId } });
+      return Post.updateOne({ _id: post }, { $push: { comments: commentId } });
       // User.updateOne({ _id: author }, { $push: { _comments: commentId } })
     })
     .then(() => {
@@ -180,7 +181,9 @@ router.post('/posts/:id/save', (req, res, next) => {
       res.json({ message: 'saved' });
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        message: err.message,
+      });
     });
 });
 

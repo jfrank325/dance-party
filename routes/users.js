@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/User');
+const Post = require('../models/Post');
 
 /* Here we'll write the routes dedicated to handle the user logic (auth) */
 
@@ -12,6 +13,7 @@ router.get('/user/:id', (req, res) => {
     .populate('_posts')
     .populate('_upvotes')
     .populate('_savedposts')
+    .populate({ path: '_comments', ref: 'post', populate: { path: 'post', model: 'Post' } })
     .then((user) => {
       res.json(user);
     })

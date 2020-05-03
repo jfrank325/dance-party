@@ -41,24 +41,27 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
   };
 
   const savePost = () => {
-    axios.post(`/api/posts/${id}/save`);
+    if (user) {
+      axios.post(`/api/posts/${id}/save`);
+    }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios
-      .post(`/api/posts/${id}/comments`, {
-        message: message,
-      })
-      .then(() => {
-        setMessage('');
-        getThisPost();
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
+    if (user) {
+      e.preventDefault();
+      axios
+        .post(`/api/posts/${id}/comments`, {
+          message: message,
+          post: id,
+        })
+        .then(() => {
+          setMessage('');
+          getThisPost();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const toggleShowComments = () => {

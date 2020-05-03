@@ -35,12 +35,16 @@ const Posts = (props) => {
   };
 
   const executeSearch = () => {
-    let filteredPosts = [...posts].filter((post) =>
-      post.content
-        ? post.content.toLowerCase() && post.title.toLowerCase().includes(query.toLowerCase())
-        : post.title.toLowerCase().includes(query.toLowerCase())
+    let filteredPosts = [...posts].filter(
+      (post) =>
+        (post.content && post.title.toLowerCase().includes(query.toLowerCase())) ||
+        (post.content && post.content.toLowerCase().includes(query.toLowerCase()))
     );
-    query.length > 0 ? setPosts(filteredPosts) : getData();
+    if (query.length > 0) {
+      setPosts(filteredPosts);
+    } else {
+      getData();
+    }
     setQuery('');
   };
 
