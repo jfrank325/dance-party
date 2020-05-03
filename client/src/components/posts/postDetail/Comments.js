@@ -13,7 +13,9 @@ const Comments = (props) => {
                 {comment.message}
                 {'  '}
                 <span style={{ color: 'deepskyblue' }}>
-                  <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
+                  {comment.author && (
+                    <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
+                  )}
                 </span>
               </p>
             </div>
@@ -24,7 +26,9 @@ const Comments = (props) => {
                 {comment.message}
                 {'   '}
                 <span style={{ color: 'deepskyblue' }}>
-                  <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
+                  {comment.author && (
+                    <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
+                  )}
                 </span>
               </p>
             </div>

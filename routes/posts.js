@@ -111,8 +111,8 @@ router.post('/posts/:id/comments', (req, res, next) => {
   })
     .then((commentDocument) => {
       const commentId = commentDocument._id;
-      return Post.updateOne({ _id: post }, { $push: { comments: commentId } });
-      // User.updateOne({ _id: author }, { $push: { _comments: commentId } })
+      Post.updateOne({ _id: post }, { $push: { comments: commentId } }).exec();
+      User.updateOne({ _id: author }, { $push: { _comments: commentId } }).exec();
     })
     .then(() => {
       res.json({});
