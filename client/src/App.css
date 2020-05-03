@@ -75,8 +75,9 @@ body {
 }
 
 .navbar img {
-  visibility: hidden;
-  margin: 0 50px;
+  /* visibility: hidden; */
+  width: 1.6rem;
+  margin: 0 1rem;
 }
 
 .navbar a:hover {
@@ -86,10 +87,6 @@ body {
 
 .hidden {
   visibility: hidden;
-}
-
-.navbar img {
-  width: 50px;
 }
 
 .link-container {
@@ -439,6 +436,11 @@ b {
 
   .navbar a {
     font-size: 0.9rem;
+  }
+
+  .navbar img {
+    width: 0.9rem;
+    margin: 0 1rem;
   }
 
   .search-container {
