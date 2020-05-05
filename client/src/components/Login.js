@@ -24,7 +24,6 @@ const Login = ({ setUser, history }) => {
         // redirect
         history.push('/');
         // update state for user in <App/>
-        console.log(response);
         setUser(response.data);
       })
       .catch((err) => {

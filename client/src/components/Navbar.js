@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Logo from '../../src/images/fourSwans.png';
 import BackArrow from '../images/LeftArrowWhite.png';
 
 const Navbar = ({ user, setUser }) => {
@@ -18,7 +17,7 @@ const Navbar = ({ user, setUser }) => {
           <img src={BackArrow} alt="Logo" />
         </Link>
         <Link to="/">
-          <h1>DanceParty</h1>
+          <h1>DancerParty</h1>
         </Link>
         {user && (
           <div className="link-container">

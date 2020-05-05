@@ -13,7 +13,6 @@ const SingleUserPosts = (props) => {
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(`/api/posts/authored/${id}`);
-      console.log('response from authoredposts', res.data);
       setPosts(res.data._posts.reverse());
     };
     getData();

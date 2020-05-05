@@ -473,3 +473,11 @@ b {
     height: 32px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .navbar img {
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+  }
+}
