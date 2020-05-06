@@ -1,2 +1,12 @@
+# dependencies
+/client/node_modules
+/node_modules
+/.pnp
+.pnp.js
+
+
+
 node_modules
 .env
+.env.development
+.env.production
