@@ -37,7 +37,7 @@ const Comments = (props) => {
         <button onClick={toggleShowComments}>Hide Comments</button>
       ) : (
         <button onClick={toggleShowComments} style={{ color: 'deepskyblue' }}>
-          ...
+          ..
         </button>
       )}
       <form onSubmit={handleSubmit}>
