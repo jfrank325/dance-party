@@ -7,26 +7,30 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
+    "autoprefixer": "^9.8.0",
     "axios": "^0.19.2",
     "cloudinary": "^1.21.0",
     "cloudinary-react": "^1.4.0",
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "^2.2.1",
+    "node-sass": "^4.14.1",
+    "postcss-cli": "^7.1.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "react-share": "^4.1.0"
+    "react-share": "^4.1.0",
+    "tailwindcss": "^1.4.6"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
     "build": "npm run build:css && react-scripts build",
-    "build-dev": "dotenv -e .env.development react-scripts build",
-    "build-prod": "dotenv -e .env.production react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "build-dev": "dotenv -e .env.development react-scripts build npm run build:css",
+    "build-prod": "dotenv -e .env.production react-scripts build npm run build:css",
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,9 +47,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "autoprefixer": "^9.7.6",
-    "postcss-cli": "^7.1.0",
-    "tailwindcss": "^1.2.0"
-  }
+  "devDependencies": {}
 }

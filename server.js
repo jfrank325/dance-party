@@ -25,8 +25,6 @@ app.use((req, res) => {
   res.sendFile(__dirname + '/client/build/index.html');
 });
 
-const PORT = process.env.PORT || 5000;
-
 app.listen(process.env.PORT, () => {
-  console.log(`Express server listening to: ${PORT}`);
+  console.log(`Express server listening to: ${process.env.PORT}`);
 });
