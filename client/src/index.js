@@ -6,15 +6,14 @@ import './assets/main.css';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
-// axios.get('/api/auth/loggedin').then((response) => {
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
-);
-
-// from App   user={response.data}
+axios.get('/api/auth/loggedin').then((response) => {
+  ReactDOM.render(
+    <BrowserRouter>
+      <App user={response.data} />
+    </BrowserRouter>,
+    document.getElementById('root')
+  );
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
