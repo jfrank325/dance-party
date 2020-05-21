@@ -67,7 +67,9 @@ body {
 
 .navbar h1 {
   font-family: 'Lobster';
-  letter-spacing: 0.2rem;
+  /* font-family: 'Rock Salt'; */
+  font-weight: 500;
+  /* letter-spacing: 0.2rem; */
   color: var(--sunrise);
   font-size: 2rem;
   display: flex;
