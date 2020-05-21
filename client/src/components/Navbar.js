@@ -17,7 +17,7 @@ const Navbar = ({ user, setUser }) => {
           <img src={BackArrow} alt="Logo" />
         </Link>
         <Link to="/">
-          <h1>DancerParty</h1>
+          <h1>DancerTalk</h1>
         </Link>
         {user && (
           <div className="link-container">
