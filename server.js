@@ -22,7 +22,7 @@ app.use(routes);
 
 app.use((req, res) => {
   // // If no routes match, send them the React HTML.
-  res.sendFile('client/build/index.html');
+  res.sendFile(__dirname, 'client/build/index.html');
 });
 
 app.listen(process.env.PORT, () => {
