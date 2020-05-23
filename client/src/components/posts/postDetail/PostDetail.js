@@ -73,61 +73,65 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
   }
 
   return (
-    <div className="post-detail-container">
-      <div className="full-post-container">
-        <div className="postcard-container">
-          <div className="card-vote-container">
-            <div>
-              <Votes handleDownvote={handleDownvote} handleUpvote={handleUpvote} id={id} />
-            </div>
-            <div key={id} className="post-content">
-              <Link to={`/posts/${id}`}>
-                <b>{title}</b>
+    <>
+      {singlePost && <div style={{ height: '3rem' }}></div>}
+      <div className="post-detail-container">
+        <div className="full-post-container">
+          <div className="postcard-container">
+            <div className="card-vote-container">
+              <div>
+                <Votes handleDownvote={handleDownvote} handleUpvote={handleUpvote} id={id} />
+              </div>
+              <div key={id} className="post-content">
+                <Link to={`/posts/${id}`}>
+                  <b>{title}</b>
 
-                <img src={image} alt="" />
-                {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
-              </Link>
-              <Author
-                author={_author}
-                date={new Date(created_at).toDateString()}
-                time={new Date(created_at).toTimeString().slice(0, 8)}
-              />{' '}
-              {postLink && (
-                <div className="post-link">
-                  <a href={postLink} rel="noreferrer noopener" target="_blank">
-                    <p>Go to link </p>
-                  </a>
-                </div>
-              )}
-              {content && (
-                <p className="post-content">
-                  {singlePost ? content : content.length > 300 ? content.slice(0, 300) + '...' : content}
-                </p>
-              )}
-              <p>
-                {upvote_count} {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
-              </p>
-              <div className="bin-comments-container">
-                <BinSave deleteThisPost={deleteThisPost} savePost={savePost} id={id} />
-                {comments && singlePost ? (
-                  <Comments
-                    setMessage={setMessage}
-                    handleChange={(text) => setMessage(text.target.value)}
-                    comments={[...comments].reverse()}
-                    handleSubmit={handleSubmit}
-                    toggleShowComments={toggleShowComments}
-                    message={message}
-                    showComments={showComments}
-                  />
-                ) : (
-                  <Link to={`/posts/${id}`}>Comments</Link>
+                  <img className="content-img" src={image} alt="" />
+                  {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
+                </Link>
+                <Author
+                  author={_author}
+                  date={new Date(created_at).toDateString()}
+                  time={new Date(created_at).toTimeString().slice(0, 8)}
+                />{' '}
+                {postLink && (
+                  <div className="post-link">
+                    <a href={postLink} rel="noreferrer noopener" target="_blank">
+                      <p>Go to link &gt;</p>
+                    </a>
+                  </div>
                 )}
+                {content && (
+                  <p className="post-content">
+                    {singlePost ? content : content.length > 300 ? content.slice(0, 300) + '...' : content}
+                  </p>
+                )}
+                <p>
+                  <span style={{ color: 'var(--sky)' }}>{upvote_count}</span>{' '}
+                  {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
+                </p>
+                <div className="bin-comments-container">
+                  <BinSave deleteThisPost={deleteThisPost} savePost={savePost} id={id} />
+                  {comments && singlePost ? (
+                    <Comments
+                      setMessage={setMessage}
+                      handleChange={(text) => setMessage(text.target.value)}
+                      comments={[...comments].reverse()}
+                      handleSubmit={handleSubmit}
+                      toggleShowComments={toggleShowComments}
+                      message={message}
+                      showComments={showComments}
+                    />
+                  ) : (
+                    <Link to={`/posts/${id}`}>Comments</Link>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

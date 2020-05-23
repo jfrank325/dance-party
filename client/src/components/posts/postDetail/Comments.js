@@ -8,11 +8,11 @@ const Comments = (props) => {
       <h3>Comments</h3>
       {showComments
         ? comments.map((comment) => (
-            <div key={comment._id} style={{ marginBottom: '12px' }}>
+            <div key={comment._id} className="comment">
               <p>
                 {comment.message}
                 {'  '}
-                <span style={{ color: 'deepskyblue' }}>
+                <span style={{ color: 'var(--sky)' }}>
                   {comment.author && (
                     <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
                   )}
@@ -21,11 +21,11 @@ const Comments = (props) => {
             </div>
           ))
         : comments.slice(0, 5).map((comment) => (
-            <div key={comment._id} style={{ marginBottom: '12px' }}>
+            <div key={comment._id} className="comment">
               <p>
                 {comment.message}
                 {'   '}
-                <span style={{ color: 'deepskyblue' }}>
+                <span style={{ color: 'var(--sky)' }}>
                   {comment.author && (
                     <Link to={`/posts/authored/${comment.author._id}`}>-{comment.author.username}</Link>
                   )}
@@ -34,10 +34,12 @@ const Comments = (props) => {
             </div>
           ))}
       {showComments ? (
-        <button onClick={toggleShowComments}>Hide Comments</button>
+        <button onClick={toggleShowComments} style={{ color: 'var(--sky)' }}>
+          Show Less
+        </button>
       ) : (
-        <button onClick={toggleShowComments} style={{ color: 'deepskyblue' }}>
-          ..
+        <button onClick={toggleShowComments} style={{ color: 'var(--sky)' }}>
+          Show All...
         </button>
       )}
       <form onSubmit={handleSubmit}>
