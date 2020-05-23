@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors = require('cors');
 require('./db'); // will run the code in `./db/index.js` (which is the database connection logic)
 require('./passport');
 
@@ -9,6 +9,9 @@ const logger = require('morgan');
 const app = express();
 
 require('./session')(app);
+
+// Allow cross-origin
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true })); // sets the `body` object in the `request` with the values from an HTML POST form
 

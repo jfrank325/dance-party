@@ -18,15 +18,19 @@ const Posts = (props) => {
 
   const getData = async () => {
     const res = await axios.get('/api/posts');
-    setPosts(res.data.reverse());
+    setPosts(res.data);
+    console.log(res.data);
   };
 
-  const sortByUpvotes = () => setPosts([...posts].sort((a, b) => b.upvote_count - a.upvote_count));
+  const sortByUpvotes = () => {
+    getData();
+  };
 
   const sortByCommentCount = () => setPosts([...posts].sort((a, b) => b.comments.length - a.comments.length));
 
-  const sortByNewest = () => {
-    getData();
+  const sortByNewest = async () => {
+    const res = await axios.get('/api/posts/newest');
+    setPosts(res.data.reverse());
   };
 
   const deletePost = (id) => {

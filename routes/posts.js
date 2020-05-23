@@ -8,12 +8,12 @@ const url = require('url');
 /* Here we'll write the routes for the posts */
 
 router.get('/posts', (req, res) => {
-  // let sort = {};
-  // if (req.query.sortBy) {
-  //   sort[req.query.sortBy] = -1;
-  // } else {
-  //   sort.upvote_count = -1;
-  // }
+  let sort = {};
+  if (req.query.sortBy) {
+    sort[req.query.sortBy] = -1;
+  } else {
+    sort.upvote_count = -1;
+  }
   // if (req.query.sortBy) {
   //   sort = { [req.query.sortBy]: -1 };
   // } else {
@@ -21,8 +21,23 @@ router.get('/posts', (req, res) => {
   // }
 
   Post.find()
-    // .sort(sort)
+    .sort(sort)
     // .populate('comments.author')
+    .populate('_author')
+    .populate({ path: 'comments', ref: 'author', populate: { path: 'author', model: 'User' } })
+    .limit(30)
+    .then((posts) => {
+      res.json(posts);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
+
+router.get('/posts/newest', (req, res) => {
+  Post.find()
     .populate('_author')
     .populate({ path: 'comments', ref: 'author', populate: { path: 'author', model: 'User' } })
     .limit(30)
