@@ -65,7 +65,7 @@ const Posts = (props) => {
           <div>
             {props.user && !createPost ? (
               <div id="create-container">
-                <img style={{ width: '30px', paddingRight: '5px' }} src={Pencil} alt="Pencil" />
+                <img src={Pencil} alt="Pencil" />
                 <button onClick={toggleCreatePost}> Create Post</button>
               </div>
             ) : props.user ? (

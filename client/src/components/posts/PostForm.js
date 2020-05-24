@@ -96,9 +96,9 @@ const PostForm = ({ refresh, closeForm }) => {
       <label htmlFor="link">Link</label>
       <input id="link" name="link" type="text" value={link} onChange={handleChange} />
       <button className="button" onClick={handleLink}>
-        Automatically Generate Link Info
+        Generate Link Info & Image
       </button>
-      <Uploads uploadImage={uploadImage} uploadVideo={uploadVideo} loading={state.loading} />
+      <Uploads id="uploads" uploadImage={uploadImage} uploadVideo={uploadVideo} loading={state.loading} />
       <button className="button" style={{ margin: '2rem auto 0 auto' }} onClick={refresh}>
         Submit Post
       </button>

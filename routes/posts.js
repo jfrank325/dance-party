@@ -5,8 +5,6 @@ const Comments = require('../models/Comments');
 const uploadCloud = require('../config/cloudinary');
 const url = require('url');
 
-/* Here we'll write the routes for the posts */
-
 router.get('/posts', (req, res) => {
   let sort = {};
   if (req.query.sortBy) {
@@ -86,9 +84,6 @@ router.get('/posts/:id', (req, res) => {
 });
 
 router.post('/posts', (req, res) => {
-  // Todo: add a middleware to protect this route from non-logged in users
-  // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
-
   const { title, type, content, link, image, video, url } = req.body;
 
   Post.create({

@@ -36,7 +36,9 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
   const deleteThisPost = (id) => {
     if (user._id === post._author._id) {
       axios.post(`/api/posts/${id}/delete`);
-      deletePost(id);
+      if (!singlePost) {
+        deletePost(id);
+      }
     }
   };
 

@@ -23,6 +23,7 @@ body {
   font-family: ubuntu, -apple-system, Ubuntu, Roboto, Oxygen, BlinkMacSystemFont, 'Segoe UI', Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
   letter-spacing: 0.02rem;
+  color: var(--midnight);
 }
 
 .light-blue {
@@ -89,7 +90,7 @@ body {
 
 .navbar img {
   /* visibility: hidden; */
-  width: 1.6rem;
+  width: 1.4rem;
   margin: 0 1rem;
 }
 
@@ -226,10 +227,16 @@ b {
   transition: color 0.5s ease-out;
 }
 
+#create-container img {
+  width: 30px;
+  max-height: 100%;
+}
+
 #create-container img:hover {
   transform: rotate(360deg);
   transition: transform 2s ease;
 }
+
 /* PostForm */
 
 .postform-container {
@@ -271,6 +278,8 @@ b {
 .create-post textarea {
   border: solid 2px var(--sky);
   border-radius: 5px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .dot {
@@ -478,6 +487,10 @@ b {
 
   .create-sort-container {
     flex-direction: column-reverse;
+  }
+
+  #create-container button:hover {
+    transition: none;
   }
 
   .sort-button {
