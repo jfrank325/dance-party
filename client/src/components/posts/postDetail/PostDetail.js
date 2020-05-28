@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Author from './Author';
+import Content from './Content';
+import PostLink from './PostLink';
+import UpvoteCount from './UpvoteCount';
 import BinSave from './BinSave';
 import Comments from './Comments';
 import Votes from './Votes';
+import MainContent from './MainContent';
 
 const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
   const [thisPost, setThisPost] = useState(post);
   const [message, setMessage] = useState('');
   const [showComments, setShowComments] = useState(false);
 
-  const { title, content, image, video, comments, upvote_count, _author, created_at } = thisPost ? thisPost : post;
+  const { title, content, image, video, comments, upvote_count, _author, created_at, link } = thisPost
+    ? thisPost
+    : post;
   const id = post._id;
 
   const getThisPost = async () => {
@@ -85,33 +91,15 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                 <Votes handleDownvote={handleDownvote} handleUpvote={handleUpvote} id={id} />
               </div>
               <div key={id} className="post-content">
-                <Link to={`/posts/${id}`}>
-                  <b>{title}</b>
-
-                  <img className="content-img" src={image} alt="" />
-                  {video && <video autoPlay loop muted src={video} controls controlsList="nodownload" />}
-                </Link>
+                <MainContent id={id} title={title} image={image} video={video} />
                 <Author
                   author={_author}
                   date={new Date(created_at).toDateString()}
                   time={new Date(created_at).toTimeString().slice(0, 8)}
                 />{' '}
-                {postLink && (
-                  <div className="post-link">
-                    <a href={postLink} rel="noreferrer noopener" target="_blank">
-                      <p>Go to link &gt;</p>
-                    </a>
-                  </div>
-                )}
-                {content && (
-                  <p className="post-content">
-                    {singlePost ? content : content.length > 300 ? content.slice(0, 300) + '...' : content}
-                  </p>
-                )}
-                <p>
-                  <span style={{ color: 'var(--sky)' }}>{upvote_count}</span>{' '}
-                  {upvote_count === 1 ? 'Upvote' : 'Upvotes'}
-                </p>
+                {link && <PostLink postLink={link} />}
+                {content && <Content content={content} singlePost={singlePost} />}
+                <UpvoteCount upvote_count={upvote_count} />
                 <div className="bin-comments-container">
                   <BinSave deleteThisPost={deleteThisPost} savePost={savePost} id={id} />
                   {comments && singlePost ? (
@@ -125,7 +113,9 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                       showComments={showComments}
                     />
                   ) : (
-                    <Link to={`/posts/${id}`}>Comments</Link>
+                    <Link to={`/posts/${id}`}>
+                      <span style={{ color: 'var(--sky)' }}>{comments.length} </span>Comments
+                    </Link>
                   )}
                 </div>
               </div>

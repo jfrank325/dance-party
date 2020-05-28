@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BackArrow from '../images/arrowLW.png';
+import Profile from '../images/profile.png';
 
 const Navbar = ({ user, setUser }) => {
   const logout = () => {
@@ -22,7 +23,9 @@ const Navbar = ({ user, setUser }) => {
         {user && (
           <div className="link-container">
             <div className="auth-links">
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile">
+                <img src={Profile} alt="Profile" />
+              </Link>
               <Link onClick={logout} to="/">
                 Logout
               </Link>

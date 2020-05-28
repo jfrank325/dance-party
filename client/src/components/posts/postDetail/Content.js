@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Content = ({ text, type }) =>
-  type === 'link' ? (
-    <h3>
-      <a href={text}>{text}</a>
-    </h3>
-  ) : (
-    <h3>{text}</h3>
-  );
+const Content = ({ content, singlePost }) => (
+  <p className="post-content">
+    {singlePost ? content : content.length > 300 ? content.slice(0, 300) + '...' : content}
+  </p>
+);
+
 export default Content;
