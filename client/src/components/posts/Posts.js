@@ -14,6 +14,7 @@ const Posts = (props) => {
 
   useEffect(() => {
     getData();
+    sortByNewest();
   }, []);
 
   const getData = async () => {
