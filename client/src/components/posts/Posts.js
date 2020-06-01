@@ -14,24 +14,23 @@ const Posts = (props) => {
 
   useEffect(() => {
     getData();
-    sortByNewest();
   }, []);
 
   const getData = async () => {
-    const res = await axios.get('/api/posts');
-    setPosts(res.data);
+    const res = await axios.get('/api/posts/newest');
+    setPosts(res.data.reverse());
     console.log(res.data);
   };
 
-  const sortByUpvotes = () => {
-    getData();
+  const sortByUpvotes = async () => {
+    const res = await axios.get('/api/posts');
+    setPosts(res.data);
   };
 
   const sortByCommentCount = () => setPosts([...posts].sort((a, b) => b.comments.length - a.comments.length));
 
   const sortByNewest = async () => {
-    const res = await axios.get('/api/posts/newest');
-    setPosts(res.data.reverse());
+    getData();
   };
 
   const deletePost = (id) => {
