@@ -277,8 +277,8 @@ b {
 .create-post textarea {
   border: solid 2px var(--sky);
   border-radius: 5px;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
+  /* overflow-wrap: break-word;
+  white-space: pre-wrap; */
 }
 
 .dot {
@@ -353,7 +353,7 @@ b {
 
 .content-img {
   margin-top: 0.5rem;
-  /* width: 90%; */
+  /* width: 17rem; */
 }
 
 .bottom-content-container {
@@ -525,5 +525,11 @@ b {
     visibility: hidden;
     width: 0;
     margin: 0;
+  }
+}
+
+@media screen and (max-width: 1367px) {
+  .create-sort-container {
+    flex-direction: column-reverse;
   }
 }
