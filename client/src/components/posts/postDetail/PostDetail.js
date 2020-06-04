@@ -9,6 +9,7 @@ import BinSave from './BinSave';
 import Comments from './Comments';
 import Votes from './Votes';
 import MainContent from './MainContent';
+import { Popup } from 'semantic-ui-react';
 
 const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
   const [thisPost, setThisPost] = useState(post);
@@ -98,7 +99,7 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                   time={new Date(created_at).toTimeString().slice(0, 8)}
                 />{' '}
                 {link && <PostLink postLink={link} />}
-                {content && <Content content={content} singlePost={singlePost} />}
+                {content && <Content content={content} singlePost={singlePost} id={id} />}
                 <UpvoteCount upvote_count={upvote_count} />
                 <div className="bin-comments-container">
                   <BinSave deleteThisPost={deleteThisPost} savePost={savePost} id={id} />
@@ -113,9 +114,15 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                       showComments={showComments}
                     />
                   ) : (
-                    <Link to={`/posts/${id}`}>
-                      <span style={{ color: 'var(--sky)' }}>{comments.length} </span>Comments
-                    </Link>
+                    <Popup
+                      style={{ color: 'var(--gray)', fontSize: '0.8rem' }}
+                      content="Go To Comments"
+                      trigger={
+                        <Link to={`/posts/${id}`}>
+                          <span style={{ color: 'var(--sky)' }}>{comments.length} </span>Comments
+                        </Link>
+                      }
+                    />
                   )}
                 </div>
               </div>

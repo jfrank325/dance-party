@@ -85,18 +85,19 @@ const PostForm = ({ refresh, closeForm }) => {
     }
   };
 
-  const { title, content, link } = state;
+  const { title, content, link, image } = state;
 
   return (
     <form className="create-post" encType="multipart/form-data" onSubmit={handleSubmit}>
       <label htmlFor="title">Title*</label>
       <input id="title" name="title" value={title} onChange={handleChange} />
       <label htmlFor="content">Content</label>
-      <textarea rows="5" id="content" name="content" value={content} onChange={handleChange} />
+      <textarea className="textarea" rows="5" id="content" name="content" value={content} onChange={handleChange} />
       <label htmlFor="link">Link</label>
       <input id="link" name="link" type="text" value={link} onChange={handleChange} />
+      {image && <img src={image} alt="Your Image" style={{ width: '15rem', margin: '0 auto', padding: '2rem 0' }} />}
       <button className="button" onClick={handleLink}>
-        Generate Link Info & Image
+        Auto Generate Link Info & Image
       </button>
       <Uploads id="uploads" uploadImage={uploadImage} uploadVideo={uploadVideo} loading={state.loading} />
       <button className="button" style={{ margin: '2rem auto 0 auto' }} onClick={refresh}>
