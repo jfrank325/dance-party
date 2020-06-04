@@ -58,7 +58,7 @@ const PostForm = ({ refresh, closeForm }) => {
     setState({
       ...state,
       title: res.data.title,
-      image: res.data.image,
+      image: res.data.image.replace(/^http:\/\//i, 'https://'),
       content: res.data.description,
       url: res.data.url,
     });
