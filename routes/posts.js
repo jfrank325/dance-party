@@ -5,6 +5,14 @@ const Comments = require('../models/Comments');
 const uploadCloud = require('../config/cloudinary');
 const url = require('url');
 
+const loginCheck = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+};
+
 router.get('/posts', (req, res) => {
   let sort = {};
   if (req.query.sortBy) {
@@ -109,7 +117,7 @@ router.post('/posts', (req, res) => {
     });
 });
 
-router.post('/posts/:id/comments', (req, res, next) => {
+router.post('/posts/:id/comments', loginCheck, (req, res) => {
   const message = req.body.message;
   const post = req.params.id;
   const author = req.user.id;
@@ -128,11 +136,13 @@ router.post('/posts/:id/comments', (req, res, next) => {
       res.json({});
     })
     .catch((err) => {
-      next(err);
+      res.status(500).json({
+        message: err.message,
+      });
     });
 });
 
-router.get('/posts/:id/comments', (req, res, next) => {
+router.get('/posts/:id/comments', loginCheck, (req, res) => {
   Post.findById(req.params.id)
     .populate({
       path: 'comments',
@@ -150,7 +160,9 @@ router.get('/posts/:id/comments', (req, res, next) => {
       res.json(comments);
     })
     .catch((err) => {
-      next(err);
+      res.status(500).json({
+        message: err.message,
+      });
     });
 });
 

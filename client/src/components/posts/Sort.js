@@ -6,10 +6,10 @@ const Sort = ({ sortByNewest, sortByUpvotes, sortByCommentCount }) => (
       Newest
     </button>{' '}
     <button className="sort-button" onClick={sortByUpvotes}>
-      Upvotes
+      Upvoted
     </button>
     <button className="sort-button" onClick={sortByCommentCount}>
-      Comments
+      Commented
     </button>
   </div>
 );

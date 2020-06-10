@@ -15,7 +15,7 @@ const Navbar = ({ user, setUser }) => {
     <>
       <nav className="navbar">
         <Link to="/">
-          <img src={BackArrow} alt="Logo" />
+          <img src={BackArrow} alt="Logo" id='back-arrow' />
         </Link>
         <Link to="/">
           <h1>DancerParty</h1>

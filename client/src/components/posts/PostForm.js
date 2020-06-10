@@ -92,10 +92,10 @@ const PostForm = ({ refresh, closeForm }) => {
       <label htmlFor="title">Title*</label>
       <input id="title" name="title" value={title} onChange={handleChange} />
       <label htmlFor="content">Content</label>
-      <textarea className="textarea" rows="5" id="content" name="content" value={content} onChange={handleChange} />
+      <textarea className="textarea" rows="7" id="content" name="content" value={content} onChange={handleChange} />
       <label htmlFor="link">Link</label>
       <input id="link" name="link" type="text" value={link} onChange={handleChange} />
-      {image && <img src={image} alt="Your Image" style={{ width: '15rem', margin: '0 auto', padding: '2rem 0' }} />}
+      {image && <img src={image} alt="Yours" style={{ width: '15rem', margin: '0 auto', padding: '2rem 0' }} />}
       <button className="button" onClick={handleLink}>
         Auto Generate Link Info & Image
       </button>

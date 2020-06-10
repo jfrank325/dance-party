@@ -19,7 +19,6 @@ const Posts = (props) => {
   const getData = async () => {
     const res = await axios.get('/api/posts/newest');
     setPosts(res.data.reverse());
-    console.log(res.data);
   };
 
   const sortByUpvotes = async () => {

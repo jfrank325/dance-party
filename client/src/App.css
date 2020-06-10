@@ -79,19 +79,14 @@ body {
   margin-left: 8rem;
 }
 
-/* .navbar h1 {
-  font-family: 'Lobster';
-  font-weight: 500;
-  color: var(--sunrise);
-  font-size: 2rem;
-  display: flex;
-  justify-self: center;
-} */
-
 .navbar img {
-  /* visibility: hidden; */
-  width: 1.4rem;
-  margin: 0 1rem;
+  width: 1.6rem;
+  /* margin: 0 1rem; */
+}
+
+#back-arrow {
+  margin-left: 0.5rem;
+  width: 1.5rem;
 }
 
 .navbar a:hover {
@@ -257,6 +252,7 @@ b {
 
 .postform-container textarea {
   color: var(--midnight);
+  overflow: auto;
 }
 
 .create-post {
@@ -349,6 +345,12 @@ b {
   width: 40rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.post-content pre {
+  white-space: pre-line;
+  text-align: left;
+  font-family: ubuntu, -apple-system, Ubuntu, Roboto, Oxygen, BlinkMacSystemFont, 'Segoe UI', Cantarell, 'Open Sans';
 }
 
 .content-img {
@@ -463,11 +465,6 @@ b {
     font-size: medium;
   }
 
-  .navbar img {
-    width: 0%;
-    margin: 0;
-  }
-
   .content-container {
     margin: 0 5%;
   }
@@ -480,9 +477,8 @@ b {
     font-size: 0.9rem;
   }
 
-  .navbar img {
-    width: 0.9rem;
-    margin: 0 1rem;
+  #back-arrow {
+    width: 1.2rem;
   }
 
   .search-container {
@@ -522,9 +518,7 @@ b {
 
 @media screen and (max-width: 600px) {
   .navbar img {
-    visibility: hidden;
-    width: 0;
-    margin: 0;
+    width: 1.3rem;
   }
 }
 
