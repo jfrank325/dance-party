@@ -112,6 +112,7 @@ const PostDetail = ({ post, deletePost, user, postLink, singlePost }) => {
                       toggleShowComments={toggleShowComments}
                       message={message}
                       showComments={showComments}
+                      user={user}
                     />
                   ) : (
                     <Popup

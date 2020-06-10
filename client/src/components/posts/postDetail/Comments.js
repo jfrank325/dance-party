@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Comments = (props) => {
-  const { handleSubmit, handleChange, comments, message, showComments, toggleShowComments } = props;
+  const { handleSubmit, handleChange, comments, message, showComments, toggleShowComments, user } = props;
   return (
     <div className="comments-container">
       <h3>Comments</h3>
@@ -42,9 +42,11 @@ const Comments = (props) => {
           Show All...
         </button>
       )}
-      <form onSubmit={handleSubmit}>
-        <input className="comment-input" name="comment" value={message} onChange={handleChange} type="text" />
-      </form>
+      {user && (
+        <form onSubmit={handleSubmit}>
+          <input className="comment-input" name="comment" value={message} onChange={handleChange} type="text" />
+        </form>
+      )}
     </div>
   );
 };
