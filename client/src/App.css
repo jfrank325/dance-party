@@ -464,6 +464,10 @@ b {
     font-size: medium;
   }
 
+  .auth-input {
+    font-size: 1.1rem;
+  }
+
   .content-container {
     margin: 0 5%;
   }
