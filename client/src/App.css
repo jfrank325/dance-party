@@ -348,8 +348,7 @@ b {
 }
 
 .post-content pre {
-  white-space: pre-line;
-  text-align: left;
+  white-space: pre-wrap;
   font-family: ubuntu, -apple-system, Ubuntu, Roboto, Oxygen, BlinkMacSystemFont, 'Segoe UI', Cantarell, 'Open Sans';
 }
 
