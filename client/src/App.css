@@ -472,6 +472,10 @@ b {
     margin: 0 5%;
   }
 
+  #upload {
+    border: none;
+  }
+
   .navbar h1 {
     margin: 0;
   }
