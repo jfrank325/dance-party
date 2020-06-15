@@ -2,11 +2,14 @@ require('dotenv').config();
 const cors = require('cors');
 require('./db'); // will run the code in `./db/index.js` (which is the database connection logic)
 require('./passport');
+const compression = require('compression');
 
 const express = require('express');
 const logger = require('morgan');
 
 const app = express();
+
+app.use(compression());
 
 require('./session')(app);
 
