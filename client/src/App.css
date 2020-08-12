@@ -455,6 +455,34 @@ b {
 .delete-save-container {
 }
 
+/*Scroll To*/
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.scroll-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 100%;
+  transition: opacity 0.4s;
+  opacity: 0.5;
+  z-index: 10;
+  height: 2rem;
+  animation: fadeIn 0.3s;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.scroll-container:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 800px) {
   * {
     font-size: 98%;
@@ -521,6 +549,15 @@ b {
   .save {
     height: 32px;
   }
+}
+
+.scroll-container {
+  bottom: 0.8rem;
+  right: 0.8rem;
+  opacity: 0.5;
+  width: 2rem;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 @media screen and (max-width: 600px) {

@@ -5,11 +5,13 @@ import App from './App';
 import './assets/main.css';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
+import ScrollToTop from './components/ScrollToTop';
 
 axios.get('/api/auth/loggedin').then((response) => {
   ReactDOM.render(
     <BrowserRouter>
       <App user={response.data} />
+      <ScrollToTop />
     </BrowserRouter>,
     document.getElementById('root')
   );

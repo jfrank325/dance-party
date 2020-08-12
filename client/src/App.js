@@ -32,7 +32,6 @@ const App = (props) => {
           // component={Signup}
         />
         <Route path="/login" render={(props) => <Login history={props.history} setUser={setThisUser} />} />
-
         <Route exact path="/" render={(props) => <Posts {...props} user={user} />} />
         <Route exact path="/posts/authored/:authorId" render={(props) => <SingleUserPosts {...props} user={user} />} />
         <Route path="/profile" render={() => <Profile user={user} />} />
