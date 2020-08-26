@@ -13,7 +13,9 @@ const Search = ({ updateSearchText, executeSearch, query }) => {
       <form className="search-form" onSubmit={onSubmit}>
         <div className="search-inner-container">
           <i className="fa fa-search"></i>
-          <input className="search-input" type="text" value={query} onChange={handleChange} />
+          <label htmlFor="search">
+            <input className="search-input" type="text" name="search" value={query} onChange={handleChange} />
+          </label>
         </div>
       </form>
     </div>

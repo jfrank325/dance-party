@@ -76,17 +76,16 @@ const Posts = (props) => {
               </div>
             ) : (
               <div>
-                <h3>
-                  {' '}
-                  <Link className="light-blue" to="/signup">
-                    Sign Up{' '}
-                  </Link>
-                  or{' '}
-                  <Link className="light-blue" to="/login">
-                    Login{' '}
-                  </Link>
-                  to create a Post
-                </h3>
+                {/* <h3> */}{' '}
+                <Link className="light-blue" to="/signup">
+                  Sign Up{' '}
+                </Link>
+                or{' '}
+                <Link className="light-blue" to="/login">
+                  Login{' '}
+                </Link>
+                to create a Post
+                {/* </h3> */}
               </div>
             )}
           </div>
