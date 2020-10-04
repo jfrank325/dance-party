@@ -6,6 +6,7 @@ import './assets/main.css';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 import ScrollToTop from './components/ScrollToTop';
+import 'typeface-poppins';
 
 axios.get('/api/auth/loggedin').then((response) => {
   ReactDOM.render(

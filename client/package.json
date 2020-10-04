@@ -20,7 +20,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.0",
     "react-share": "^4.2.1",
-    "tailwindcss": "^1.8.8"
+    "tailwindcss": "^1.8.8",
+    "typeface-poppins": "^0.0.72"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",

@@ -20,8 +20,9 @@
 
 body {
   background: var(--daylight);
-  font-family: ubuntu, -apple-system, Ubuntu, Roboto, Oxygen, BlinkMacSystemFont, 'Segoe UI', Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
+  /* font-family: ubuntu, -apple-system, Ubuntu, Roboto, Oxygen, BlinkMacSystemFont, 'Segoe UI', Cantarell, 'Open Sans', */
+  /* 'Helvetica Neue', sans-serif; */
+  font-family: Poppins;
   letter-spacing: 0.02rem;
   color: var(--midnight);
 }
@@ -349,7 +350,8 @@ b {
 
 .post-content pre {
   white-space: pre-wrap;
-  font-family: ubuntu, -apple-system, Ubuntu, Roboto, Oxygen, BlinkMacSystemFont, 'Segoe UI', Cantarell, 'Open Sans';
+  /* font-family: ubuntu, -apple-system, Ubuntu, Roboto, Oxygen, BlinkMacSystemFont, 'Segoe UI', Cantarell, 'Open Sans'; */
+  font-family: Poppins;
 }
 
 .content-img {
